@@ -10,12 +10,8 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
  * 用户角色表
- * </p>
- *
- * @author scott
- * @since 2018-12-21
+ * @author zgs
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -44,7 +40,4 @@ public class SysUserRole implements Serializable {
 		this.userId = userId;
 		this.roleId = roleId;
 	}
-
-    
-
 }

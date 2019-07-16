@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zgs.common.api.vo.Result;
-import com.zgs.modules.system.entity.SysUser;
-import com.zgs.common.api.vo.Result;
-import com.zgs.modules.system.entity.SysUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.FileCopyUtils;
@@ -30,12 +27,8 @@ import org.springframework.web.servlet.HandlerMapping;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>
- * 用户表 前端控制器
- * </p>
- *
- * @author scott
- * @since 2018-12-20
+ * 文件上传
+ * @author zgs
  */
 @Slf4j
 @RestController
@@ -46,8 +39,7 @@ public class CommonController {
 	private String uploadpath;
 
 	@PostMapping(value = "/upload")
-	public Result<SysUser> upload(HttpServletRequest request, HttpServletResponse response) {
-		Result<SysUser> result = new Result<>();
+	public Result upload(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			String ctxPath = uploadpath;
 			String fileName = null;
@@ -68,14 +60,13 @@ public class CommonController {
 			if (dbpath.contains("\\")) {
 				dbpath = dbpath.replace("\\", "/");
 			}
-			result.setMessage(dbpath);
-			result.setSuccess(true);
+			return Result.success(dbpath);
+
 		} catch (IOException e) {
-			result.setSuccess(false);
-			result.setMessage(e.getMessage());
+
 			e.printStackTrace();
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 
 	/**

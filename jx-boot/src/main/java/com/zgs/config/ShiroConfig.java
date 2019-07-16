@@ -15,20 +15,15 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import com.zgs.modules.shiro.authc.MyRealm;
-import com.zgs.modules.shiro.authc.aop.JwtFilter;
-import com.zgs.modules.shiro.authc.aop.ResourceCheckFilter;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 /**
- * @author: Scott
- * @date: 2018/2/7
- * @description: shiro 配置类
+ * shiro 配置类
+ * @author zgs
  */
-
 @Configuration
 public class ShiroConfig {
 	

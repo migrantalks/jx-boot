@@ -3,9 +3,7 @@ package com.zgs.modules.shiro.authc;
 import org.apache.shiro.authc.AuthenticationToken;
  
 /**
- * @author Scott
- * @create 2018-07-12 15:19
- * @desc
+ * @author zgs
  **/
 public class JwtToken implements AuthenticationToken {
 	

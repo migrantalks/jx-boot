@@ -9,8 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 示例带参定时任务
- * 
- * @author Scott
+ * @author zgs
  */
 @Slf4j
 public class SampleParamJob implements Job {

@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 
 /**
- * 单数据源配置（jeecg.datasource.open = false时生效）
- * @author zhoujf
+ * 单数据源配置
+ * @author zgs
  *
  */
 @Configuration
@@ -16,20 +16,11 @@ import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 public class MybatisPlusConfig {
 
     /**
-         *  分页插件
+     *  分页插件
      */
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
     }
-    
-//    /**
-//     * mybatis-plus SQL执行效率插件【生产环境可以关闭】
-//     */
-//    @Bean
-//    public PerformanceInterceptor performanceInterceptor() {
-//        return new PerformanceInterceptor();
-//    }
-    
    
 }

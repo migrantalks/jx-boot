@@ -11,9 +11,6 @@ import org.apache.shiro.SecurityUtils;
 import com.zgs.common.system.api.ISysBaseAPI;
 import com.zgs.common.util.IPUtils;
 import com.zgs.common.util.SpringContextUtils;
-import com.zgs.modules.system.entity.SysLog;
-import com.zgs.modules.system.entity.SysUser;
-import com.zgs.modules.system.mapper.SysLogMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,9 +36,9 @@ public class SysBaseAPI implements ISysBaseAPI {
 
 		//获取登录用户信息
 		SysUser sysUser = (SysUser)SecurityUtils.getSubject().getPrincipal();
-		if(sysUser!=null){
+		if (sysUser != null){
 			sysLog.setUserid(sysUser.getUsername());
-			sysLog.setUsername(sysUser.getRealname());
+			sysLog.setUsername(sysUser.getUsername());
 
 		}
 		sysLog.setCreateTime(new Date());

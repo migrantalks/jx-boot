@@ -1,24 +1,20 @@
 package com.zgs.modules.system.service;
 
 import com.zgs.modules.system.entity.SysLog;
-import com.zgs.modules.system.entity.SysLog;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
  * 系统日志表 服务类
- * </p>
  *
- * @author zhangweijian
- * @since 2018-12-26
+ * @author zgs
  */
 public interface ISysLogService extends IService<SysLog> {
 
 	/**
-	 * @功能：清空所有日志记录
+	 * 清空所有日志记录
 	 */
-	public void removeAll();
+	void removeAll();
 	
 	/**
 	 * 获取系统总访问次数

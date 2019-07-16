@@ -13,7 +13,7 @@ import org.springframework.util.CollectionUtils;
 
 /**
  * redis 工具类
- * @author Scott
+ * @author zgs
  *
  */
 @Component

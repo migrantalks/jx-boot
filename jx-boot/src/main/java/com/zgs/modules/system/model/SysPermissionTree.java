@@ -75,7 +75,7 @@ public class SysPermissionTree implements Serializable {
 	/**
 	 * 删除状态 0正常 1已删除
 	 */
-	private Integer delFlag;
+	private String isDeleted;
 
 	/**
 	 * 创建人
@@ -113,7 +113,7 @@ public class SysPermissionTree implements Serializable {
 		this.component = permission.getComponent();
 		this.createBy = permission.getCreateBy();
 		this.createTime = permission.getCreateTime();
-		this.delFlag = permission.getDelFlag();
+		this.isDeleted = permission.getIsDeleted();
 		this.description = permission.getDescription();
 		this.icon = permission.getIcon();
 		this.isLeaf = permission.getIsLeaf();
@@ -237,12 +237,12 @@ public class SysPermissionTree implements Serializable {
 		this.description = description;
 	}
 
-	public Integer getDelFlag() {
-		return delFlag;
+	public String getIsDeleted() {
+		return isDeleted;
 	}
 
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
+	public void setIsDeleted(String isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	public String getCreateBy() {

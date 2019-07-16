@@ -4,7 +4,6 @@
 
 	<!-- 根据用户名查询 -->
 	<select id="getUserByName" resultType="com.zgs.modules.system.entity.SysUser">
-		select * from  sys_user  where username = #{username}
+		select * from  sys_user where login_name = #{username}
 	</select>
-
 </mapper>

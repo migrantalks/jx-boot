@@ -1,6 +1,6 @@
 package com.zgs.modules.system.model;
 
-import com.zgs.modules.system.entity.SysDepart;
+import com.zgs.modules.system.entity.SysDept;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,29 +9,24 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * <p>
  * 部门表 存储树结构数据的实体类
- * <p>
- * 
- * @author Steve
- * @Since 2019-01-22 
  */
-public class SysDepartTreeModel implements Serializable{
+public class SysDeptTreeModel implements Serializable{
 	
     private static final long serialVersionUID = 1L;
     
-    /** 对应SysDepart中的id字段,前端数据树中的key*/
+    /** 对应sysDept中的id字段,前端数据树中的key*/
     private String key;
 
-    /** 对应SysDepart中的id字段,前端数据树中的value*/
+    /** 对应sysDept中的id字段,前端数据树中的value*/
     private String value;
 
     /** 对应depart_name字段,前端数据树中的title*/
     private String title;
-    
 
-    // 以下所有字段均与SysDepart相同
-    
+
+    // 以下所有字段均与sysDept相同
+
     private String id;
 
     private String parentId;
@@ -60,7 +55,7 @@ public class SysDepartTreeModel implements Serializable{
 
     private String status;
 
-    private String delFlag;
+    private String isDeleted;
 
     private String createBy;
 
@@ -70,36 +65,36 @@ public class SysDepartTreeModel implements Serializable{
 
     private Date updateTime;
 
-    private List<SysDepartTreeModel> children = new ArrayList<>();
+    private List<SysDeptTreeModel> children = new ArrayList<>();
 
 
     /**
-     * 将SysDepart对象转换成SysDepartTreeModel对象
-     * @param sysDepart
+     * 将sysDept对象转换成sysDeptTreeModel对象
+     * @param sysDept
      */
-	public SysDepartTreeModel(SysDepart sysDepart) {
-		this.key = sysDepart.getId();
-        this.value = sysDepart.getId();
-        this.title = sysDepart.getDepartName();
-        this.id = sysDepart.getId();
-        this.parentId = sysDepart.getParentId();
-        this.departName = sysDepart.getDepartName();
-        this.departNameEn = sysDepart.getDepartNameEn();
-        this.departNameAbbr = sysDepart.getDepartNameAbbr();
-        this.departOrder = sysDepart.getDepartOrder();
-        this.description = sysDepart.getDescription();
-        this.orgType = sysDepart.getOrgType();
-        this.orgCode = sysDepart.getOrgCode();
-        this.mobile = sysDepart.getMobile();
-        this.fax = sysDepart.getFax();
-        this.address = sysDepart.getAddress();
-        this.memo = sysDepart.getMemo();
-        this.status = sysDepart.getStatus();
-        this.delFlag = sysDepart.getDelFlag();
-        this.createBy = sysDepart.getCreateBy();
-        this.createTime = sysDepart.getCreateTime();
-        this.updateBy = sysDepart.getUpdateBy();
-        this.updateTime = sysDepart.getUpdateTime();
+	public SysDeptTreeModel(SysDept sysDept) {
+		this.key = sysDept.getId();
+        this.value = sysDept.getId();
+        this.title = sysDept.getDepartName();
+        this.id = sysDept.getId();
+        this.parentId = sysDept.getParentId();
+        this.departName = sysDept.getDepartName();
+        this.departNameEn = sysDept.getDepartNameEn();
+        this.departNameAbbr = sysDept.getDepartNameAbbr();
+        this.departOrder = sysDept.getDepartOrder();
+        this.description = sysDept.getDescription();
+        this.orgType = sysDept.getOrgType();
+        this.orgCode = sysDept.getOrgCode();
+        this.mobile = sysDept.getMobile();
+        this.fax = sysDept.getFax();
+        this.address = sysDept.getAddress();
+        this.memo = sysDept.getMemo();
+        this.status = sysDept.getStatus();
+        this.isDeleted = sysDept.getIsDeleted();
+        this.createBy = sysDept.getCreateBy();
+        this.createTime = sysDept.getCreateTime();
+        this.updateBy = sysDept.getUpdateBy();
+        this.updateTime = sysDept.getUpdateTime();
     }
     
     
@@ -141,11 +136,11 @@ public class SysDepartTreeModel implements Serializable{
         this.id = id;
     }
 
-    public List<SysDepartTreeModel> getChildren() {
+    public List<SysDeptTreeModel> getChildren() {
         return children;
     }
 
-    public void setChildren(List<SysDepartTreeModel> children) {
+    public void setChildren(List<SysDeptTreeModel> children) {
         this.children = children;
     }
 
@@ -257,12 +252,12 @@ public class SysDepartTreeModel implements Serializable{
         this.status = status;
     }
 
-    public String getDelFlag() {
-        return delFlag;
+    public String getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
+    public void setIsDeleted(String isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public String getCreateBy() {
@@ -297,7 +292,7 @@ public class SysDepartTreeModel implements Serializable{
         this.updateTime = updateTime;
     }
 
-    public SysDepartTreeModel() { }
+    public SysDeptTreeModel() { }
 
     /**
      * 重写equals方法
@@ -310,7 +305,7 @@ public class SysDepartTreeModel implements Serializable{
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SysDepartTreeModel model = (SysDepartTreeModel) o;
+        SysDeptTreeModel model = (SysDeptTreeModel) o;
         return Objects.equals(id, model.id) &&
                 Objects.equals(parentId, model.parentId) &&
                 Objects.equals(departName, model.departName) &&
@@ -325,7 +320,7 @@ public class SysDepartTreeModel implements Serializable{
                 Objects.equals(address, model.address) &&
                 Objects.equals(memo, model.memo) &&
                 Objects.equals(status, model.status) &&
-                Objects.equals(delFlag, model.delFlag) &&
+                Objects.equals(isDeleted, model.isDeleted) &&
                 Objects.equals(createBy, model.createBy) &&
                 Objects.equals(createTime, model.createTime) &&
                 Objects.equals(updateBy, model.updateBy) &&
@@ -341,7 +336,7 @@ public class SysDepartTreeModel implements Serializable{
 
         return Objects.hash(id, parentId, departName, departNameEn, departNameAbbr,
         		departOrder, description, orgType, orgCode, mobile, fax, address, 
-        		memo, status, delFlag, createBy, createTime, updateBy, updateTime, 
+        		memo, status, isDeleted, createBy, createTime, updateBy, updateTime,
         		children);
     }
 

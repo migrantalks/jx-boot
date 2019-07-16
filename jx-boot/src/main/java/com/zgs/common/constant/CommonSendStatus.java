@@ -2,7 +2,7 @@ package com.zgs.common.constant;
 
 /**
  * 	系统通告 - 发布状态
- * @author LeeShaoQing
+ * @author zgs
  *
  */
 public interface CommonSendStatus {

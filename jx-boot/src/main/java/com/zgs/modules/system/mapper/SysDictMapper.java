@@ -5,21 +5,17 @@ import java.util.Map;
 
 import com.zgs.modules.system.entity.SysDict;
 import org.apache.ibatis.annotations.Param;
-import com.zgs.modules.system.entity.SysDict;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>
  * 字典表 Mapper 接口
- * </p>
  *
- * @author zhangweijian
- * @since 2018-12-28
+ * @author zgs
  */
 public interface SysDictMapper extends BaseMapper<SysDict> {
 	
-	public List<Map<String,String>> queryDictItemsByCode(@Param("code") String code);
+	List<Map<String,String>> queryDictItemsByCode(@Param("code") String code);
 	
-	public String queryDictTextByKey(@Param("code") String code,@Param("key") String key);
+	String queryDictTextByKey(@Param("code") String code,@Param("key") String key);
 
 }

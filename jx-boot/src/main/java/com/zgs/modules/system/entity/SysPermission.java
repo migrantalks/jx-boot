@@ -9,12 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
  * 菜单权限表
- * </p>
- *
- * @author scott
- * @since 2018-12-21
+ * @author zgs
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -91,7 +87,7 @@ public class SysPermission implements Serializable {
 	/**
 	 * 删除状态 0正常 1已删除
 	 */
-	private Integer delFlag;
+	private String isDeleted;
 	
 	/**
 	 * 是否隐藏路由菜单: 0否,1是（默认值0）

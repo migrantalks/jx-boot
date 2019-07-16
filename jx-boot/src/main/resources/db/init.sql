@@ -1,141 +1,4 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : mysql
-Source Server Version : 50037
-Source Host           : localhost:3306
-Source Database       : jx_boot
-
-Target Server Type    : MYSQL
-Target Server Version : 50037
-File Encoding         : 65001
-
-Date: 2019-02-25 16:29:00
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for demo
--- ----------------------------
-DROP TABLE IF EXISTS `demo`;
-CREATE TABLE `demo` (
-  `id` varchar(50) NOT NULL COMMENT '主键ID',
-  `name` varchar(30) default NULL COMMENT '姓名',
-  `key_word` varchar(255) default NULL COMMENT '关键词',
-  `punch_time` datetime default NULL COMMENT '打卡时间',
-  `salary_money` decimal(10,3) default NULL COMMENT '工资',
-  `bonus_money` double(10,2) default NULL COMMENT '奖金',
-  `sex` varchar(2) default NULL COMMENT '性别 {男:1,女:2}',
-  `age` int(11) default NULL COMMENT '年龄',
-  `birthday` date default NULL COMMENT '生日',
-  `email` varchar(50) default NULL COMMENT '邮箱',
-  `content` varchar(1000) default NULL COMMENT '个人简介',
-  `create_by` varchar(32) default NULL COMMENT '创建人',
-  `create_time` datetime default NULL COMMENT '创建时间',
-  `update_by` varchar(32) default NULL COMMENT '修改人',
-  `update_time` datetime default NULL COMMENT '修改时间',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of demo
--- ----------------------------
-INSERT INTO `demo` VALUES ('1c2ba51b29a42d9de02bbd708ea8121a', '777777', '777', '2018-12-07 19:43:17', null, null, null, '7', '2018-12-07', null, null, null, null, 'admin', '2019-02-21 18:26:04');
-INSERT INTO `demo` VALUES ('1dc29e80be14d1400f165b5c6b30c707', 'zhang daihao', null, null, null, null, '2', null, null, 'zhangdaiscott@163.com', null, null, null, null, null);
-INSERT INTO `demo` VALUES ('304e651dc769d5c9b6e08fb30457a602', '小白兔', null, null, null, null, '2', '28', null, null, null, 'scott', '2019-01-19 13:12:53', 'qinfeng', '2019-01-19 13:13:12');
-INSERT INTO `demo` VALUES ('4', 'Sandy', '开源，很好', '2018-12-15 00:00:00', null, null, '2', '21', '2018-12-15', 'test4@baomidou.com', '聪明00', null, null, null, null);
-INSERT INTO `demo` VALUES ('42c08b1a2e5b2a96ffa4cc88383d4b11', '秦50090', null, '2019-01-05 20:33:31', null, null, null, '28', '2019-01-05', null, null, 'admin', '2019-01-19 20:33:54', 'admin', '2019-01-19 20:34:29');
-INSERT INTO `demo` VALUES ('4436302a0de50bb83025286bc414d6a9', 'zhang daihao', null, null, null, null, null, null, null, 'zhangdaiscott@163.com', null, 'admin', '2019-01-19 15:39:04', null, null);
-INSERT INTO `demo` VALUES ('7', 'zhangdaiscott', null, null, null, null, '1', null, '2019-01-03', null, null, null, null, null, null);
-INSERT INTO `demo` VALUES ('917e240eaa0b1b2d198ae869b64a81c3', 'zhang daihao', null, null, null, null, '2', '0', '2018-11-29', 'zhangdaiscott@163.com', null, null, null, null, null);
-INSERT INTO `demo` VALUES ('94420c5d8fc4420dde1e7196154b3a24', '秦111', null, null, null, null, null, null, null, null, null, 'scott', '2019-01-19 12:54:58', 'qinfeng', '2019-01-19 13:12:10');
-INSERT INTO `demo` VALUES ('b86897900c770503771c7bb88e5d1e9b', 'scott1', '开源、很好、hello', null, null, null, '1', null, null, 'zhangdaiscott@163.com', null, 'scott', '2019-01-19 12:22:34', null, null);
-INSERT INTO `demo` VALUES ('c0b7c3de7c62a295ab715943de8a315d', '秦风555', null, null, null, null, null, null, null, null, null, 'admin', '2019-01-19 13:18:30', 'admin', '2019-01-19 13:18:50');
-INSERT INTO `demo` VALUES ('c2c0d49e3c01913067cf8d1fb3c971d2', 'zhang daihao', null, null, null, null, null, null, null, 'zhangdaiscott@163.com', null, 'admin', '2019-01-19 23:37:18', 'admin', '2019-01-21 16:49:06');
-INSERT INTO `demo` VALUES ('d24668721446e8478eeeafe4db66dcff', 'zhang daihao999', null, null, null, null, '1', null, null, 'zhangdaiscott@163.com', null, null, null, null, null);
-INSERT INTO `demo` VALUES ('eaa6c1116b41dc10a94eae34cf990133', 'zhang daihao', null, null, null, null, null, null, null, 'zhangdaiscott@163.com', null, null, null, null, null);
-INSERT INTO `demo` VALUES ('ffa9da1ad40632dfcabac51d766865bd', '秦999', null, null, null, null, null, null, null, null, null, 'admin', '2019-01-19 23:36:34', 'admin', '2019-02-14 17:30:43');
-
--- ----------------------------
--- Table structure for jeecg_order_customer
--- ----------------------------
-DROP TABLE IF EXISTS `jeecg_order_customer`;
-CREATE TABLE `jeecg_order_customer` (
-  `id` varchar(32) NOT NULL COMMENT '主键',
-  `name` varchar(100) NOT NULL COMMENT '客户名',
-  `sex` varchar(4) default NULL COMMENT '性别',
-  `idcard` varchar(18) default NULL COMMENT '身份证号码',
-  `idcard_pic` varchar(500) default NULL COMMENT '身份证扫描件',
-  `telphone` varchar(32) default NULL COMMENT '电话1',
-  `order_id` varchar(32) NOT NULL COMMENT '外键',
-  `create_by` varchar(32) default NULL COMMENT '创建人',
-  `create_time` datetime default NULL COMMENT '创建时间',
-  `update_by` varchar(32) default NULL COMMENT '修改人',
-  `update_time` datetime default NULL COMMENT '修改时间',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of jeecg_order_customer
--- ----------------------------
-INSERT INTO `jeecg_order_customer` VALUES ('0e2326ab54710dc4df5eaff164f2a679', '秦风', '1', '370285198602058822', null, '18611788676', '54e739bef5b67569c963c38da52581ec', 'jeecg', '2019-02-20 17:21:02', null, null);
-INSERT INTO `jeecg_order_customer` VALUES ('58702a52bd79c093235eac6ab582f0e3', 'zhangdaiscott222', null, null, null, null, 'eb13ab35d2946a2b0cfe3452bca1e73f', 'admin', '2019-02-21 16:23:23', null, null);
-INSERT INTO `jeecg_order_customer` VALUES ('62f6494f9ac9d31c84a07c032096256b', 'x秦风', '1', null, null, null, 'b190737bd04cca8360e6f87c9ef9ec4e', 'admin', '2019-02-15 18:39:29', null, null);
-INSERT INTO `jeecg_order_customer` VALUES ('80e45b7f44a8277b5cc46764ede67e4e', '小王', '2', '370285198604033222', null, '18611788674', 'eb13ab35d2946a2b0cfe3452bca1e73f', 'admin', '2019-02-18 10:22:24', null, null);
-INSERT INTO `jeecg_order_customer` VALUES ('a28195feae7318b69213b5a264c9bd7b', '张经理', '2', '370285198602058823', null, '18611788674', '54e739bef5b67569c963c38da52581ec', 'jeecg', '2019-02-20 17:21:02', null, null);
-INSERT INTO `jeecg_order_customer` VALUES ('bce38126fbd86f5720d97f270f44e72a', 'scott', '2', null, null, null, 'b190737bd04cca8360e6f87c9ef9ec4e', 'admin', '2019-02-15 18:39:29', null, null);
-INSERT INTO `jeecg_order_customer` VALUES ('c341b7c1999e62c2b3a4bf3802dad8b7', '小张', '1', '370285198602058211', null, '18611788676', 'eb13ab35d2946a2b0cfe3452bca1e73f', 'admin', '2019-02-18 10:22:24', null, null);
-
--- ----------------------------
--- Table structure for jeecg_order_main
--- ----------------------------
-DROP TABLE IF EXISTS `jeecg_order_main`;
-CREATE TABLE `jeecg_order_main` (
-  `id` varchar(32) NOT NULL COMMENT '主键',
-  `order_code` varchar(50) default NULL COMMENT '订单号',
-  `ctype` varchar(500) default NULL COMMENT '订单类型',
-  `order_date` datetime default NULL COMMENT '订单日期',
-  `order_money` double(10,3) default NULL COMMENT '订单金额',
-  `content` varchar(500) default NULL COMMENT '订单备注',
-  `create_by` varchar(32) default NULL COMMENT '创建人',
-  `create_time` datetime default NULL COMMENT '创建时间',
-  `update_by` varchar(32) default NULL COMMENT '修改人',
-  `update_time` datetime default NULL COMMENT '修改时间',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of jeecg_order_main
--- ----------------------------
-INSERT INTO `jeecg_order_main` VALUES ('54e739bef5b67569c963c38da52581ec', 'NC911', '1', '2019-02-18 09:58:51', '40.000', null, 'admin', '2019-02-18 09:58:47', 'admin', '2019-02-18 09:58:59');
-INSERT INTO `jeecg_order_main` VALUES ('b190737bd04cca8360e6f87c9ef9ec4e', 'B0018888', '1', null, null, null, 'admin', '2019-02-15 18:39:29', 'admin', '2019-02-15 18:39:37');
-INSERT INTO `jeecg_order_main` VALUES ('eb13ab35d2946a2b0cfe3452bca1e73f', 'BJ9980', '1', null, '90.000', null, 'admin', '2019-02-16 17:36:42', 'admin', '2019-02-16 17:46:16');
-
--- ----------------------------
--- Table structure for jeecg_order_ticket
--- ----------------------------
-DROP TABLE IF EXISTS `jeecg_order_ticket`;
-CREATE TABLE `jeecg_order_ticket` (
-  `id` varchar(32) NOT NULL COMMENT '主键',
-  `ticket_code` varchar(100) NOT NULL COMMENT '航班号',
-  `tickect_date` datetime default NULL COMMENT '航班时间',
-  `order_id` varchar(32) NOT NULL COMMENT '外键',
-  `create_by` varchar(32) default NULL COMMENT '创建人',
-  `create_time` datetime default NULL COMMENT '创建时间',
-  `update_by` varchar(32) default NULL COMMENT '修改人',
-  `update_time` datetime default NULL COMMENT '修改时间',
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of jeecg_order_ticket
--- ----------------------------
-INSERT INTO `jeecg_order_ticket` VALUES ('17fa15b9e8b396338e83dc66d418e9cb', 'ffff', '2019-02-21 00:00:00', 'eb13ab35d2946a2b0cfe3452bca1e73f', 'admin', '2019-02-21 16:24:14', null, null);
-INSERT INTO `jeecg_order_ticket` VALUES ('3017078886539ff13f780d6af6ab919f', 'C10029', '2019-02-20 00:00:00', '54e739bef5b67569c963c38da52581ec', 'jeecg', '2019-02-20 17:21:02', null, null);
-INSERT INTO `jeecg_order_ticket` VALUES ('57ef198c68dfe0ba83709d3afaa097bc', '111', '2019-02-01 00:00:00', 'b190737bd04cca8360e6f87c9ef9ec4e', 'admin', '2019-02-15 18:39:29', null, null);
-INSERT INTO `jeecg_order_ticket` VALUES ('ba9d22c73af43fa109971ee21e3171ce', 'C10019', '2019-02-18 00:00:00', '54e739bef5b67569c963c38da52581ec', 'jeecg', '2019-02-20 17:21:02', null, null);
-INSERT INTO `jeecg_order_ticket` VALUES ('c07a0581bdb8915cc70a20fef8e3b2af', '222', '2019-02-23 00:00:00', 'b190737bd04cca8360e6f87c9ef9ec4e', 'admin', '2019-02-15 18:39:29', null, null);
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -374,7 +237,7 @@ CREATE TABLE `sys_announcement` (
   `send_status` varchar(10) default NULL COMMENT '发布状态（0未发布，1已发布，2已撤销）',
   `send_time` datetime default NULL COMMENT '发布时间',
   `cancel_time` datetime default NULL COMMENT '撤销时间',
-  `del_flag` varchar(255) default NULL COMMENT '删除状态（0，正常，1已删除）',
+  `is_deleted` char(1) default '0' COMMENT '删除状态（0，正常，1已删除）',
   `create_by` varchar(255) default NULL COMMENT '创建人',
   `create_time` datetime default NULL COMMENT '创建时间',
   `update_by` varchar(255) default NULL COMMENT '更新人',
@@ -408,10 +271,10 @@ CREATE TABLE `sys_announcement_send` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for sys_depart
+-- Table structure for sys_dept
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_depart`;
-CREATE TABLE `sys_depart` (
+DROP TABLE IF EXISTS `sys_dept`;
+CREATE TABLE `sys_dept` (
   `id` varchar(32) NOT NULL COMMENT 'ID',
   `parent_id` varchar(32) default NULL COMMENT '父机构ID',
   `depart_name` varchar(100) NOT NULL COMMENT '机构/部门名称',
@@ -426,7 +289,7 @@ CREATE TABLE `sys_depart` (
   `address` varchar(100) default NULL COMMENT '地址',
   `memo` varchar(500) default NULL COMMENT '备注',
   `status` varchar(10) default NULL COMMENT '状态（1启用，0不启用）',
-  `del_flag` varchar(10) default NULL COMMENT '删除状态（0，正常，1已删除）',
+  `is_deleted` char(1) default '0' COMMENT '删除状态（0，正常，1已删除）',
   `create_by` varchar(50) default NULL COMMENT '创建人',
   `create_time` datetime default NULL COMMENT '创建日期',
   `update_by` varchar(50) default NULL COMMENT '更新人',
@@ -435,12 +298,12 @@ CREATE TABLE `sys_depart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='组织机构表';
 
 -- ----------------------------
--- Records of sys_depart
+-- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_depart` VALUES ('4f1765520d6346f9bd9c79e2479e5b12', 'c6d7cb4deeac411cb3384b1b31278596', '市场部', null, null, '0', null, '2', 'A01A03', null, null, null, null, null, '0', 'admin', '2019-02-20 17:15:34', null, null);
-INSERT INTO `sys_depart` VALUES ('57197590443c44f083d42ae24ef26a2c', 'c6d7cb4deeac411cb3384b1b31278596', '研发部', null, null, '0', null, '2', 'A01A05', null, null, null, null, null, '0', 'admin', '2019-02-21 16:14:41', null, null);
-INSERT INTO `sys_depart` VALUES ('67fc001af12a4f9b8458005d3f19934a', 'c6d7cb4deeac411cb3384b1b31278596', '财务部', null, null, '0', null, '2', 'A01A04', null, null, null, null, null, '0', 'admin', '2019-02-21 16:14:35', 'admin', '2019-02-25 12:49:41');
-INSERT INTO `sys_depart` VALUES ('c6d7cb4deeac411cb3384b1b31278596', '', '北京国炬信息技术有限公司', null, null, '0', null, '1', 'A01', null, null, null, null, null, '0', 'admin', '2019-02-11 14:21:51', 'admin', '2019-02-18 23:17:33');
+INSERT INTO `sys_dept` VALUES ('4f1765520d6346f9bd9c79e2479e5b12', 'c6d7cb4deeac411cb3384b1b31278596', '市场部', null, null, '0', null, '2', 'A01A03', null, null, null, null, null, '0', 'admin', '2019-02-20 17:15:34', null, null);
+INSERT INTO `sys_dept` VALUES ('57197590443c44f083d42ae24ef26a2c', 'c6d7cb4deeac411cb3384b1b31278596', '研发部', null, null, '0', null, '2', 'A01A05', null, null, null, null, null, '0', 'admin', '2019-02-21 16:14:41', null, null);
+INSERT INTO `sys_dept` VALUES ('67fc001af12a4f9b8458005d3f19934a', 'c6d7cb4deeac411cb3384b1b31278596', '财务部', null, null, '0', null, '2', 'A01A04', null, null, null, null, null, '0', 'admin', '2019-02-21 16:14:35', 'admin', '2019-02-25 12:49:41');
+INSERT INTO `sys_dept` VALUES ('c6d7cb4deeac411cb3384b1b31278596', '', 'XXX公司', null, null, '0', null, '1', 'A01', null, null, null, null, null, '0', 'admin', '2019-02-11 14:21:51', 'admin', '2019-02-18 23:17:33');
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -451,7 +314,7 @@ CREATE TABLE `sys_dict` (
   `dict_name` varchar(255) default NULL COMMENT '字典名称',
   `dict_code` varchar(255) default NULL COMMENT '字典编码',
   `description` varchar(255) default NULL COMMENT '描述',
-  `del_flag` int(11) default NULL COMMENT '删除状态',
+  `is_deleted` char(1) default '0' COMMENT '删除状态',
   `create_by` varchar(255) default NULL COMMENT '创建人',
   `create_time` datetime default NULL COMMENT '创建时间',
   `update_by` varchar(255) default NULL COMMENT '更新人',
@@ -517,309 +380,6 @@ CREATE TABLE `sys_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='系统日志表';
 
 -- ----------------------------
--- Records of sys_log
--- ----------------------------
-INSERT INTO `sys_log` VALUES ('b09ccd219a1ce5c7270bb659748b8330', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 15:34:38', null, null);
-INSERT INTO `sys_log` VALUES ('a22ddd4b5b0b84bd7794edd24b25fc64', '2', '添加测试DEMO', null, 'admin', '管理员', '127.0.0.1', 'com.zgs.modules.demo.test.controller.JeecgDemoController.add()', null, '[{\"createBy\":\"admin\",\"createTime\":1547883299809,\"email\":\"zhangdaiscott@163.com\",\"id\":\"7eac655877842eb39dc2f0469f3964ec\",\"name\":\"zhang daihao\"}]', null, '25', 'admin', '2019-01-19 15:34:59', null, null);
-INSERT INTO `sys_log` VALUES ('07a0b3f8b4140a7a586305c2f40a2310', '2', '删除测试DEMO', null, 'admin', '管理员', '127.0.0.1', 'com.zgs.modules.demo.test.controller.JeecgDemoController.delete()', null, '[\"7eac655877842eb39dc2f0469f3964ec\"]', null, '14', 'admin', '2019-01-19 15:38:11', null, null);
-INSERT INTO `sys_log` VALUES ('d7902eeab2c34611fad046a79bff1c1b', '2', '添加测试DEMO', null, 'admin', '管理员', '127.0.0.1', 'com.zgs.modules.demo.test.controller.JeecgDemoController.add()', null, '[{\"createBy\":\"admin\",\"createTime\":1547883544104,\"email\":\"zhangdaiscott@163.com\",\"id\":\"4436302a0de50bb83025286bc414d6a9\",\"name\":\"zhang daihao\"}]', null, '1682', 'admin', '2019-01-19 15:39:05', null, null);
-INSERT INTO `sys_log` VALUES ('a68160f37cace166fedd299c4ca0be10', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 15:40:00', null, null);
-INSERT INTO `sys_log` VALUES ('c6c0316b6989bf1eea0a3803f593bf69', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 15:47:19', null, null);
-INSERT INTO `sys_log` VALUES ('4b1341863a8fffeccda8bbe413bd815f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 15:59:52', null, null);
-INSERT INTO `sys_log` VALUES ('ed50b1fbc80c3b953f4551081b10335e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 16:19:06', null, null);
-INSERT INTO `sys_log` VALUES ('dabdcb8e15ea9215a1af22f7567ff73d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 16:48:13', null, null);
-INSERT INTO `sys_log` VALUES ('446724ea6dd41f4a03111c42e00d80cd', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 16:56:36', null, null);
-INSERT INTO `sys_log` VALUES ('0e41fe3a34d5715bf4c88e220663583a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 17:04:06', null, null);
-INSERT INTO `sys_log` VALUES ('9f2db1ffaf89518a25cc6701da0c5858', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 17:05:07', null, null);
-INSERT INTO `sys_log` VALUES ('954f1ccb8b230d2d7d4858eec3aba0a4', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 17:08:37', null, null);
-INSERT INTO `sys_log` VALUES ('7374f3a2ccb20216cf8eecb26037ce0a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 18:08:51', null, null);
-INSERT INTO `sys_log` VALUES ('130de55edac71aab730786307cc65936', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 20:22:57', null, null);
-INSERT INTO `sys_log` VALUES ('0bc44e2d682c9f28525d203589a90b43', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 20:31:08', null, null);
-INSERT INTO `sys_log` VALUES ('122edcafd54dd06e12838f41123d9d5d', '2', '添加测试DEMO', null, 'admin', '管理员', '127.0.0.1', 'com.zgs.modules.demo.test.controller.JeecgDemoController.add()', null, '[{\"age\":28,\"birthday\":1546617600000,\"createBy\":\"admin\",\"createTime\":1547901234989,\"id\":\"42c08b1a2e5b2a96ffa4cc88383d4b11\",\"name\":\"秦500\",\"punchTime\":1546691611000}]', null, '21387', 'admin', '2019-01-19 20:34:11', null, null);
-INSERT INTO `sys_log` VALUES ('1a570aac0c30ac2955b59e2dc7a6204c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 20:58:26', null, null);
-INSERT INTO `sys_log` VALUES ('c18db091677ec01d55e913662b9028a9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 21:19:07', null, null);
-INSERT INTO `sys_log` VALUES ('88d8b4b50bdab58c52fe25fa711fbbef', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 21:21:39', null, null);
-INSERT INTO `sys_log` VALUES ('6b876be6e384337b36ad28a4a5868be8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 21:22:12', null, null);
-INSERT INTO `sys_log` VALUES ('cb6b52fbbdd4c5698c17edaf9960e11e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 21:22:23', null, null);
-INSERT INTO `sys_log` VALUES ('fea8e1e2d229557185be0d9a10ebce17', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 21:55:55', null, null);
-INSERT INTO `sys_log` VALUES ('c1842fc83cdf0b0cc0264bf093e9c55d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 21:56:15', null, null);
-INSERT INTO `sys_log` VALUES ('543970eba4d1c522e3cb597b0fd4ad13', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 22:53:18', null, null);
-INSERT INTO `sys_log` VALUES ('e9ce2b3f7ac1fa3f5f7fd247207ca5c0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 22:53:35', null, null);
-INSERT INTO `sys_log` VALUES ('0e365a21c60e4460813bdc4e3cb320a3', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 23:01:34', null, null);
-INSERT INTO `sys_log` VALUES ('d3df1a4057b6d7fb4dab073a727ba21f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 23:14:02', null, null);
-INSERT INTO `sys_log` VALUES ('8f616500d666a5a67bc98e7ccd73c2e2', '2', '添加测试DEMO', null, 'admin', '管理员', '127.0.0.1', 'com.zgs.modules.demo.test.controller.JeecgDemoController.add()', null, '[{\"createBy\":\"admin\",\"createTime\":1547912194199,\"id\":\"ffa9da1ad40632dfcabac51d766865bd\",\"name\":\"秦999\"}]', null, '386', 'admin', '2019-01-19 23:36:34', null, null);
-INSERT INTO `sys_log` VALUES ('055cf35c8865761b479c7f289dc36616', '2', '添加测试DEMO', null, 'admin', '管理员', '127.0.0.1', 'com.zgs.modules.demo.test.controller.JeecgDemoController.add()', null, '[{\"createBy\":\"admin\",\"createTime\":1547912238787,\"email\":\"zhangdaiscott@163.com\",\"id\":\"c2c0d49e3c01913067cf8d1fb3c971d2\",\"name\":\"zhang daihao\"}]', null, '16', 'admin', '2019-01-19 23:37:18', null, null);
-INSERT INTO `sys_log` VALUES ('69e3164d007be2b9834e4fb398186f39', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-19 23:38:17', null, null);
-INSERT INTO `sys_log` VALUES ('92e514fee917a1a459c4ffdb0ca42516', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 10:20:52', null, null);
-INSERT INTO `sys_log` VALUES ('d3f08843a9b2b3284711e376fb785beb', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 10:58:03', null, null);
-INSERT INTO `sys_log` VALUES ('76bea561f662ec0ccf05bc370f1ffe35', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 11:08:55', null, null);
-INSERT INTO `sys_log` VALUES ('273081678d85acebaa6615973bff31db', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:02:50', null, null);
-INSERT INTO `sys_log` VALUES ('b26369680b41d581649cf865e88331e9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:03:07', null, null);
-INSERT INTO `sys_log` VALUES ('7313b43ff53015d79a58b4dc7c660721', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:03:07', null, null);
-INSERT INTO `sys_log` VALUES ('f99912c5ff252594f14d31b768f8ad15', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:03:10', null, null);
-INSERT INTO `sys_log` VALUES ('dcec1957987abbe6658f1f2c96980366', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:05:21', null, null);
-INSERT INTO `sys_log` VALUES ('c7b6156c4f42b70c562b507766f4546c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:14:08', null, null);
-INSERT INTO `sys_log` VALUES ('52673feae24ea5bc3ca111f19c9a85d4', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:16:46', null, null);
-INSERT INTO `sys_log` VALUES ('507b55d3b5ddc487fb40ca1f716a1253', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:43:02', null, null);
-INSERT INTO `sys_log` VALUES ('7351132f4f5f65e5bf157dd7ad5344a4', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:51:36', null, null);
-INSERT INTO `sys_log` VALUES ('961992e05772bc7ad2ca927cf7649440', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 15:55:10', null, null);
-INSERT INTO `sys_log` VALUES ('3b07fda32423a5696b2097e1c23c00d4', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 16:04:32', null, null);
-INSERT INTO `sys_log` VALUES ('8447099784da63b3b2cd2fbbc5eabcea', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 16:04:49', null, null);
-INSERT INTO `sys_log` VALUES ('b20ff98a10af3c25c1991741fd59ea64', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 16:07:48', null, null);
-INSERT INTO `sys_log` VALUES ('9acebd2d37c9078f9568125fb9696976', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 16:07:59', null, null);
-INSERT INTO `sys_log` VALUES ('d70c2847d8d0936a2a761f745a84aa48', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 16:39:34', null, null);
-INSERT INTO `sys_log` VALUES ('279e519d647f1a4e1f85f9b90ab370b9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 17:01:30', null, null);
-INSERT INTO `sys_log` VALUES ('b605a83a9b5f3cdaaa1b3f4f41a5f12d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 17:04:20', null, null);
-INSERT INTO `sys_log` VALUES ('0a24b1f04f79a2bcb83c4cd12d077cbc', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 17:34:37', null, null);
-INSERT INTO `sys_log` VALUES ('661c4792f00b0814e486c3d623d7259f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 18:06:11', null, null);
-INSERT INTO `sys_log` VALUES ('d1746c5c937fcb650bd835ff74dabdff', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 18:06:32', null, null);
-INSERT INTO `sys_log` VALUES ('8ec3a287a37d155047e80a80769d5226', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 18:37:14', null, null);
-INSERT INTO `sys_log` VALUES ('6cbd2a9257fae1cb7ff7bc2eb264b3ab', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 19:08:14', null, null);
-INSERT INTO `sys_log` VALUES ('f06e8fa83b408be905b4dc7caeaf9a80', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 19:40:33', null, null);
-INSERT INTO `sys_log` VALUES ('f84e86c9a21149134b1f2599a424164b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-21 20:12:27', null, null);
-INSERT INTO `sys_log` VALUES ('88bfc5b77b4be0d6d0f7c8661cf24853', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 10:25:53', null, null);
-INSERT INTO `sys_log` VALUES ('b9bf472a12fc25a9d4b500421b08b025', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 10:53:54', null, null);
-INSERT INTO `sys_log` VALUES ('dbbcfb7f59311637a613ec9a6c63f04a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 10:53:57', null, null);
-INSERT INTO `sys_log` VALUES ('69ea2322f72b41bcdc7f235889132703', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 10:54:43', null, null);
-INSERT INTO `sys_log` VALUES ('62d197757e2cb40f9e8cb57fa6a207f7', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 10:54:54', null, null);
-INSERT INTO `sys_log` VALUES ('ccad29843623a6c3ca59548b1d533b15', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 10:56:33', null, null);
-INSERT INTO `sys_log` VALUES ('4d9299e2daac1f49eac0cec75a90c32e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 11:28:39', null, null);
-INSERT INTO `sys_log` VALUES ('43848099c1e70910ba1572868ee40415', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 11:28:48', null, null);
-INSERT INTO `sys_log` VALUES ('6fb7db45b11bc22347b234fda07700c8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 12:00:22', null, null);
-INSERT INTO `sys_log` VALUES ('e8cde8dcd6253b249d67a05aaf10f968', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 12:30:28', null, null);
-INSERT INTO `sys_log` VALUES ('6a4231540c73ad67128d5a24e6a877ff', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 12:54:30', null, null);
-INSERT INTO `sys_log` VALUES ('2b3be3da6ba9d1ee49f378d729d69c50', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 13:24:41', null, null);
-INSERT INTO `sys_log` VALUES ('78f519b618f82a39adad391fbf6b9c7a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 13:49:58', null, null);
-INSERT INTO `sys_log` VALUES ('1487d69ff97888f3a899e2ababb5ae48', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 14:21:17', null, null);
-INSERT INTO `sys_log` VALUES ('cc7fa5567e7833a3475b29b7441a2976', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 14:21:31', null, null);
-INSERT INTO `sys_log` VALUES ('52e36d72cd04bea2604747e006b038ec', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 19:47:17', null, null);
-INSERT INTO `sys_log` VALUES ('523a54948d5edaf421566014b66f9465', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 19:50:27', null, null);
-INSERT INTO `sys_log` VALUES ('48e4e10ac7e583050fd85734f0676a7c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 19:58:08', null, null);
-INSERT INTO `sys_log` VALUES ('dee4d42c439b51b228ab5db5d0723fc0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-22 20:02:56', null, null);
-INSERT INTO `sys_log` VALUES ('965c74ffe09d8a06bb817efa6d62254b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 10:01:35', null, null);
-INSERT INTO `sys_log` VALUES ('059bac84373e9dae94363ea18802d70f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 10:06:56', null, null);
-INSERT INTO `sys_log` VALUES ('9ef3f1ed07003e3abec3445920b062f1', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 11:17:05', null, null);
-INSERT INTO `sys_log` VALUES ('0169622dcd4e89b177a0917778ac7f9c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 11:17:18', null, null);
-INSERT INTO `sys_log` VALUES ('f8960d64e93606fa52220cc9c4ae35a2', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 11:21:02', null, null);
-INSERT INTO `sys_log` VALUES ('4261867172d0fd5c04c993638661ac0b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 11:24:47', null, null);
-INSERT INTO `sys_log` VALUES ('32464c6f7f772ddda0a963b19ad2fd70', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 11:30:20', null, null);
-INSERT INTO `sys_log` VALUES ('d29cf7aae44523bf2f3d187e91356fe8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 12:20:35', null, null);
-INSERT INTO `sys_log` VALUES ('0e9c0d0d26ddc652a7277912e0784d11', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 12:27:41', null, null);
-INSERT INTO `sys_log` VALUES ('25f8b1b345b1c8a070fe81d715540c85', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-23 15:39:46', null, null);
-INSERT INTO `sys_log` VALUES ('8327cced60486bad4009276e14403502', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-24 09:56:29', null, null);
-INSERT INTO `sys_log` VALUES ('515c28df59f07478339b61ca5b1b54a8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-24 10:34:51', null, null);
-INSERT INTO `sys_log` VALUES ('fa0612372b332b6c3ce787d9ca6dd2cc', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-24 11:48:21', null, null);
-INSERT INTO `sys_log` VALUES ('8300e85a2c2f16c2358d31e8b364edf7', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-24 11:55:39', null, null);
-INSERT INTO `sys_log` VALUES ('3d9874f248a984608ca98c36c21c5a7a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-24 13:05:56', null, null);
-INSERT INTO `sys_log` VALUES ('cc8ab347f332c55570830c5fc39bbf9f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-24 13:08:38', null, null);
-INSERT INTO `sys_log` VALUES ('8742a458bf166fd5f134ac65fa8903f9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-24 13:09:10', null, null);
-INSERT INTO `sys_log` VALUES ('bbe2e637bafa0d7f465dc9e1266cff3d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 11:16:50', null, null);
-INSERT INTO `sys_log` VALUES ('b3474fc5aad9ec2f36ccbbf7bf864a69', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 11:17:24', null, null);
-INSERT INTO `sys_log` VALUES ('260bb025d91b59d0135d635ef85eeb82', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 11:40:13', null, null);
-INSERT INTO `sys_log` VALUES ('1a5b71c9458c17f9bcb19a5747fd47dd', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 11:56:48', null, null);
-INSERT INTO `sys_log` VALUES ('e720278084b0d4316448ec59d4e3399d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 15:52:45', null, null);
-INSERT INTO `sys_log` VALUES ('f6646950c8465da1d1219b7a7a209fc2', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 19:14:07', null, null);
-INSERT INTO `sys_log` VALUES ('36358cacfc5eb3ba7e85cfe156218b71', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 19:14:17', null, null);
-INSERT INTO `sys_log` VALUES ('ee2bb63c47c868d59a45503b3d2f34ea', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 19:16:14', null, null);
-INSERT INTO `sys_log` VALUES ('b0d11dfec52e02f504c63e2f8224b00d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-25 19:27:44', null, null);
-INSERT INTO `sys_log` VALUES ('4acfbc327681d89dab861c77401f8992', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 10:54:36', null, null);
-INSERT INTO `sys_log` VALUES ('96ada57ac17c4477f4e4c8d596d4cc1a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 10:54:44', null, null);
-INSERT INTO `sys_log` VALUES ('e4e40e21437b23b74324e0402cceb71a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 11:34:40', null, null);
-INSERT INTO `sys_log` VALUES ('d92d9e003666c6b020f079eaee721f9f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 12:08:43', null, null);
-INSERT INTO `sys_log` VALUES ('68f7394ca53c59438b2b41e7bb9f3094', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 14:09:34', null, null);
-INSERT INTO `sys_log` VALUES ('a9b34565c6460dc9cede00ad150393f9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 14:17:53', null, null);
-INSERT INTO `sys_log` VALUES ('fa427f74dc6bd9cca3db478b5842f7f7', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 14:19:07', null, null);
-INSERT INTO `sys_log` VALUES ('8b66ec251e3107765768dbd0590eeb29', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 14:25:48', null, null);
-INSERT INTO `sys_log` VALUES ('e42a38382fce916909d6d09f66147006', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-28 14:28:44', null, null);
-INSERT INTO `sys_log` VALUES ('ed0bbe9047a7471ae1cdc1c2941eccb1', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-29 17:52:38', null, null);
-INSERT INTO `sys_log` VALUES ('36fd54ce8bc1ee4aac9e3ea4bfdcd5a8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-29 18:49:34', null, null);
-INSERT INTO `sys_log` VALUES ('40b3a9bee45b23548250936310b273f4', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-30 14:42:03', null, null);
-INSERT INTO `sys_log` VALUES ('c9be887c9292153e39861c91243b7432', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-30 15:12:15', null, null);
-INSERT INTO `sys_log` VALUES ('e40823376fa8c0e74a4e760de695e824', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-30 15:36:38', null, null);
-INSERT INTO `sys_log` VALUES ('993010965223b8e3a7a784409f7e377e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-30 15:50:41', null, null);
-INSERT INTO `sys_log` VALUES ('aa47c8cf2a4f2de16f415b9d9d3dbf05', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-30 16:14:36', null, null);
-INSERT INTO `sys_log` VALUES ('4a0020835a71fc6dcaefd01968d21f81', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-30 18:46:37', null, null);
-INSERT INTO `sys_log` VALUES ('fa9cebbb6af23d2830584b3aacd51e46', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-31 13:59:17', null, null);
-INSERT INTO `sys_log` VALUES ('60a975067f02cf05e74fa7b71e8e862a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-31 14:31:58', null, null);
-INSERT INTO `sys_log` VALUES ('fbb8834e9736bdd4b6d3baee895c4ca4', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-01-31 18:05:03', null, null);
-INSERT INTO `sys_log` VALUES ('623e4bc7c098f368abcc368227235caf', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-01 09:48:57', null, null);
-INSERT INTO `sys_log` VALUES ('9f31eedbe3f3c5c431b490d5fec0094c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-01 09:56:36', null, null);
-INSERT INTO `sys_log` VALUES ('b945fe8b63e0fc26d02c85466f36ebd9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-01 09:57:34', null, null);
-INSERT INTO `sys_log` VALUES ('968d434c45aae64c9ad0e86d18238065', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-01 10:02:22', null, null);
-INSERT INTO `sys_log` VALUES ('732a1015057fde25d81ee12a7fbf66b2', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-01 10:05:08', null, null);
-INSERT INTO `sys_log` VALUES ('d9a0bb9fe6d2c675aa84f9441c0bd8bb', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-11 10:56:23', null, null);
-INSERT INTO `sys_log` VALUES ('9c64406daa2b6e7ad1f6776789d61e43', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-11 10:56:46', null, null);
-INSERT INTO `sys_log` VALUES ('1912a44dd4a6ffa1636d2dde9c2f1ab7', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-11 11:01:03', null, null);
-INSERT INTO `sys_log` VALUES ('d19b6e77ab1b6d6aa58996a93918754c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-11 11:33:06', null, null);
-INSERT INTO `sys_log` VALUES ('81f7a606359aff9f97f95c15ce8e7c69', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-11 11:33:42', null, null);
-INSERT INTO `sys_log` VALUES ('7da063020a42db99e0f3bb9500498828', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-11 13:45:36', null, null);
-INSERT INTO `sys_log` VALUES ('b6ee157afd006ceddc8c7558c251192e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-11 14:20:56', null, null);
-INSERT INTO `sys_log` VALUES ('65ace1ae98891f48ab4121d9258e4f1e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 10:45:20', null, null);
-INSERT INTO `sys_log` VALUES ('e2af7674bb716a7c0b703c7c7e20b906', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 11:38:55', null, null);
-INSERT INTO `sys_log` VALUES ('60d4f59974170c67826e64480533d793', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 13:25:40', null, null);
-INSERT INTO `sys_log` VALUES ('775e987a2ca37edc4f21e022b265a84a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 13:36:13', null, null);
-INSERT INTO `sys_log` VALUES ('dd6fbb9b6224c927c0923c16b9285525', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 13:37:01', null, null);
-INSERT INTO `sys_log` VALUES ('f3d371d6f71409ea2fe52405b725db4a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 13:38:15', null, null);
-INSERT INTO `sys_log` VALUES ('c33b4e0bbf998330e44fad65e9d0029e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 15:54:56', null, null);
-INSERT INTO `sys_log` VALUES ('189842bf681338dc99dfa66d366a0e6f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 15:55:01', null, null);
-INSERT INTO `sys_log` VALUES ('e14cd21cf5eaad9ea3689730a824a50c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 16:12:32', null, null);
-INSERT INTO `sys_log` VALUES ('5cf2431447eab30fd3623e831033eea0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-12 19:17:29', null, null);
-INSERT INTO `sys_log` VALUES ('9bfe7312f2951503082a28c2cc966ce4', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 10:24:02', null, null);
-INSERT INTO `sys_log` VALUES ('da9a15efcf4e1e4f24647db7e2143238', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 11:19:54', null, null);
-INSERT INTO `sys_log` VALUES ('8317a81bce60a10afeb44af6ef6c807a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 11:27:58', null, null);
-INSERT INTO `sys_log` VALUES ('0a6eb1fa998b749012216542a2447ae7', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 11:29:30', null, null);
-INSERT INTO `sys_log` VALUES ('e5a9b045449136719d4c19c429c2dd56', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 13:08:05', null, null);
-INSERT INTO `sys_log` VALUES ('aaf10eab9c2b6ed6af1d7a9ce844d146', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 13:08:10', null, null);
-INSERT INTO `sys_log` VALUES ('b4ccdfc1280e73439eb1ad183076675b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 14:10:45', null, null);
-INSERT INTO `sys_log` VALUES ('018fe8d3f049a32fb8b541c893058713', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 15:17:42', null, null);
-INSERT INTO `sys_log` VALUES ('f3aab8f9dff7bf705aa29c6dcce49011', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 15:18:27', null, null);
-INSERT INTO `sys_log` VALUES ('efa591832b375b4609a5890b0c6f3250', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:00:13', null, null);
-INSERT INTO `sys_log` VALUES ('2c6822927334eb0810b71465fd9c4945', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:02:47', null, null);
-INSERT INTO `sys_log` VALUES ('7289cf420ac87ea0538bde81435b1aaa', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:03:51', null, null);
-INSERT INTO `sys_log` VALUES ('db8adca4aa7972fdc283be96d877efe0', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:04:28', null, null);
-INSERT INTO `sys_log` VALUES ('c5e541648bab341230c93377b4d4e262', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:05:09', null, null);
-INSERT INTO `sys_log` VALUES ('e261674e2640fe6d0a3cd86df631537d', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:05:51', null, null);
-INSERT INTO `sys_log` VALUES ('406e79995e3340d052d85a74a5d40d1b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:23:16', null, null);
-INSERT INTO `sys_log` VALUES ('4de1ed55165f7086f1a425a26a2f56ec', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 16:26:27', null, null);
-INSERT INTO `sys_log` VALUES ('d8eed69045aae6cedbff402b4e35f495', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-13 18:22:52', null, null);
-INSERT INTO `sys_log` VALUES ('bbf4fb593d6918cc767bb50c9b6c16c5', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-14 10:44:20', null, null);
-INSERT INTO `sys_log` VALUES ('506ce2d73a038b6e491a35a6c74a7343', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-14 13:44:04', null, null);
-INSERT INTO `sys_log` VALUES ('4303dbb3e502f11a3c4078f899bb3070', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-14 17:28:44', null, null);
-INSERT INTO `sys_log` VALUES ('2de252a92b59ebfbf16860cc563e3865', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-14 22:04:17', null, null);
-INSERT INTO `sys_log` VALUES ('e4c330b381e2fbfde49f1d4dd43e68b7', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-14 22:22:01', null, null);
-INSERT INTO `sys_log` VALUES ('22735c059b01949a87cb918f5ef3be76', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-14 22:41:28', null, null);
-INSERT INTO `sys_log` VALUES ('c5954beca75d6a0c014e2de3b621275a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-14 22:41:31', null, null);
-INSERT INTO `sys_log` VALUES ('db8c89112bf4706fb558664dd741aa46', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 09:33:23', null, null);
-INSERT INTO `sys_log` VALUES ('fa0ce422c12a565461eca56006052891', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 10:13:21', null, null);
-INSERT INTO `sys_log` VALUES ('a34ed4c6fef2b9f07a20e54ef4501b99', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 10:48:00', null, null);
-INSERT INTO `sys_log` VALUES ('b55cc05e8dd4279c0fa145833db19ba8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 11:37:40', null, null);
-INSERT INTO `sys_log` VALUES ('5c675eeb69795180eee2c1069efc114b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 12:59:43', null, null);
-INSERT INTO `sys_log` VALUES ('5dee273feb8dd12989b40c2c92ce8c4a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 13:42:58', null, null);
-INSERT INTO `sys_log` VALUES ('994efef0ebca19292e14a39b385b0e21', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 16:22:24', null, null);
-INSERT INTO `sys_log` VALUES ('fc22aaf9660e66558689a58dfa443074', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 16:30:55', null, null);
-INSERT INTO `sys_log` VALUES ('2c6ede513b83fbc23aaedb89dbfa868a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 18:03:00', null, null);
-INSERT INTO `sys_log` VALUES ('13c1e763e9d624a69727a38b85411352', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 18:39:00', null, null);
-INSERT INTO `sys_log` VALUES ('fadb32d678346ee4bab02997988ff3bc', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-15 22:55:16', null, null);
-INSERT INTO `sys_log` VALUES ('0aa792eadeae39a1ed2a98ea5d2f6d27', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-16 09:11:39', null, null);
-INSERT INTO `sys_log` VALUES ('0aa9272c0581e1d7f62b1293375b4574', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-16 17:26:36', null, null);
-INSERT INTO `sys_log` VALUES ('81c9056ac38e6f881d60f3d41df1845e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-17 11:44:47', null, null);
-INSERT INTO `sys_log` VALUES ('eb4536aa50a58985baf0a763a1ce2ebf', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-17 19:48:49', null, null);
-INSERT INTO `sys_log` VALUES ('f9062582881b42f6b139c313d8ab0463', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-17 20:47:26', null, null);
-INSERT INTO `sys_log` VALUES ('22d8a2fbd53eafb21f6f62ae073c0fc1', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-17 22:28:52', null, null);
-INSERT INTO `sys_log` VALUES ('7bc7b1ff923dbb19fb0ecd800cd690bd', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-18 09:34:59', null, null);
-INSERT INTO `sys_log` VALUES ('faea0dbfb7f86b571fed0dd270623831', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-18 14:12:14', null, null);
-INSERT INTO `sys_log` VALUES ('063baad688535096d2ed906ae6f3a128', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-18 22:09:21', null, null);
-INSERT INTO `sys_log` VALUES ('528baecc596a66eaadc8887bff911f55', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 10:08:48', null, null);
-INSERT INTO `sys_log` VALUES ('e540ca989819c54baefffbc3d05e8b58', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 10:10:54', null, null);
-INSERT INTO `sys_log` VALUES ('0643f3ad4394de9fb3c491080c6a7a03', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 10:18:42', null, null);
-INSERT INTO `sys_log` VALUES ('eb0b8a7cdf77df133566d7bd5a5f1fc0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 11:02:55', null, null);
-INSERT INTO `sys_log` VALUES ('0913bb0e92715892c470cf538726dfbc', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 16:17:09', null, null);
-INSERT INTO `sys_log` VALUES ('5034aec34f0b79da510e66008dbf2fcc', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 16:18:29', null, null);
-INSERT INTO `sys_log` VALUES ('e4afd66ac249dde9c3bd9da50f9c2469', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 17:41:54', null, null);
-INSERT INTO `sys_log` VALUES ('07132c1228b1c165f62ea35f4ff1cbe9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 18:15:44', null, null);
-INSERT INTO `sys_log` VALUES ('4f7f587bec68ed5bf9f68b0ccd76d62b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-19 21:01:47', null, null);
-INSERT INTO `sys_log` VALUES ('12709e62742056aa4a57fa8c2c82d84a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 09:13:10', null, null);
-INSERT INTO `sys_log` VALUES ('680b3e6e4768d80d6ea0ce8ba71bdd0e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 09:14:03', null, null);
-INSERT INTO `sys_log` VALUES ('a6e323785535592ee208aa7e53554644', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 09:15:27', null, null);
-INSERT INTO `sys_log` VALUES ('3a4a0e27d77aa8b624180e5fd5e4004e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 09:51:58', null, null);
-INSERT INTO `sys_log` VALUES ('b98b7ac9e890657aa86a900763afbe2a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 11:49:44', null, null);
-INSERT INTO `sys_log` VALUES ('d1eb2a8ebed28d34199c5fc4a1579c4c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 12:55:09', null, null);
-INSERT INTO `sys_log` VALUES ('85949de2d54078e6b8f3df0a3c79c43d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 17:08:44', null, null);
-INSERT INTO `sys_log` VALUES ('77579d78a903635cc4942882f568e9e5', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 17:13:33', null, null);
-INSERT INTO `sys_log` VALUES ('679e12ba247575749e03aa8f67347ac6', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 17:14:42', null, null);
-INSERT INTO `sys_log` VALUES ('5c35117cbeb39428fcc2ddd90ce96a2b', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 17:18:51', null, null);
-INSERT INTO `sys_log` VALUES ('7225200c3cec4789af4f1da2c46b129d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 17:19:23', null, null);
-INSERT INTO `sys_log` VALUES ('22ad9f87788506456c774801389d6a01', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 17:20:10', null, null);
-INSERT INTO `sys_log` VALUES ('81c95e1c8805fa191753fc99ba54c3e9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:01:21', null, null);
-INSERT INTO `sys_log` VALUES ('7285730e2644f49def0937dc99bfbe3d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:07:01', null, null);
-INSERT INTO `sys_log` VALUES ('4922f2f1173a1edc11dfd11cb2a100ae', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:08:27', null, null);
-INSERT INTO `sys_log` VALUES ('e37cce529d0c98c47b4977d7ddf963c0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:17:54', null, null);
-INSERT INTO `sys_log` VALUES ('66493cd0347eeb6ee2ef5ee923604683', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:29:47', null, null);
-INSERT INTO `sys_log` VALUES ('f04910792a74c563d057c4fcb345f963', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:30:00', null, null);
-INSERT INTO `sys_log` VALUES ('210a01dcb34302eaed0d1e95820655d0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:30:15', null, null);
-INSERT INTO `sys_log` VALUES ('48929ec94226d9ccff9fae4ff48e95e3', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:32:55', null, null);
-INSERT INTO `sys_log` VALUES ('d2ac19a709ea08f7259286df28efd635', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:35:37', null, null);
-INSERT INTO `sys_log` VALUES ('d8fd478e6ceb03a575719e1a54342333', '1', '用户名: jeecg,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:43:43', null, null);
-INSERT INTO `sys_log` VALUES ('a35a476c303983701045507c9af3fa03', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-20 18:44:58', null, null);
-INSERT INTO `sys_log` VALUES ('7e41208e29d412d586fc39375628b0d0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-21 15:34:35', null, null);
-INSERT INTO `sys_log` VALUES ('1f33d11e1833ae497e3ef65a3f02dd5b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-21 19:51:12', null, null);
-INSERT INTO `sys_log` VALUES ('dae0658783324c81fa6909b6e4a25a65', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 11:46:41', null, null);
-INSERT INTO `sys_log` VALUES ('a77d29673cfe97c9e03cfb879b934f62', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 12:41:15', null, null);
-INSERT INTO `sys_log` VALUES ('baaf37e5937f938ac92856bc74cc2b86', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 13:48:53', null, null);
-INSERT INTO `sys_log` VALUES ('3f47afcdce94596494746ac34eebf13b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 13:59:10', null, null);
-INSERT INTO `sys_log` VALUES ('b99fc7c53d4e3edc0c618edc11d3a073', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 15:58:43', null, null);
-INSERT INTO `sys_log` VALUES ('024a4c5ba78538d05373dac650b227d1', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 15:59:50', null, null);
-INSERT INTO `sys_log` VALUES ('873f425879ef9ca7ced982acda19ea58', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 16:35:59', null, null);
-INSERT INTO `sys_log` VALUES ('1b05434820cbcb038028da9f5cda31bb', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 17:45:16', null, null);
-INSERT INTO `sys_log` VALUES ('5f314fc45492d7f90b74d1ca74d1d392', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 17:45:48', null, null);
-INSERT INTO `sys_log` VALUES ('20751803c1e5b2d758b981ba22f61fcd', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 18:11:05', null, null);
-INSERT INTO `sys_log` VALUES ('50e8de3e6b45f8625b8fd5590c9fd834', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 18:23:18', null, null);
-INSERT INTO `sys_log` VALUES ('6737424e01b38f2273e9728bf39f3e37', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-22 19:43:37', null, null);
-INSERT INTO `sys_log` VALUES ('0473dedf4aa653b253b008dacff2937c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 13:04:44', null, null);
-INSERT INTO `sys_log` VALUES ('a95192071de908f37f4998af4c269bcb', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 14:26:53', null, null);
-INSERT INTO `sys_log` VALUES ('3569ada5c43a4022d3d13ac801aff40e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 14:50:55', null, null);
-INSERT INTO `sys_log` VALUES ('562092eb81561ee0f63be5dd9367d298', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:20:59', null, null);
-INSERT INTO `sys_log` VALUES ('131ccd390401b6e3894a37e4d1d195d3', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:26:52', null, null);
-INSERT INTO `sys_log` VALUES ('c12e3d7655a5a8b192bb9964a2a66946', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:35:45', null, null);
-INSERT INTO `sys_log` VALUES ('6bc98b7dc91a3924f794202867367aca', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:50:34', null, null);
-INSERT INTO `sys_log` VALUES ('002b7112a147edeb6149a891494577d0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:52:15', null, null);
-INSERT INTO `sys_log` VALUES ('202344b08b69ad70754e6adaa777eae0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:54:22', null, null);
-INSERT INTO `sys_log` VALUES ('eeb1f2e2c1b480e0bb62533848cbb176', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:55:46', null, null);
-INSERT INTO `sys_log` VALUES ('94fe4465d779e0438cfe6f0cb1a1aa7e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:57:42', null, null);
-INSERT INTO `sys_log` VALUES ('d03aaee882d13b796db860cb95f27724', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 22:59:54', null, null);
-INSERT INTO `sys_log` VALUES ('1db82f78233c120c6ec7648ca1177986', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 23:07:39', null, null);
-INSERT INTO `sys_log` VALUES ('7dc448f04edf4b9655362ad1a1c58753', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 23:10:17', null, null);
-INSERT INTO `sys_log` VALUES ('fce1553149aea9bfd93e089f387199c8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 23:11:35', null, null);
-INSERT INTO `sys_log` VALUES ('e713a89e753cbecf1e10247b2112c3f8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-24 23:14:36', null, null);
-INSERT INTO `sys_log` VALUES ('0a634ed086442afa7a5fc9aa000b898a', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:10:39', null, null);
-INSERT INTO `sys_log` VALUES ('bfa0766f53dbd3a0fe4043f57bd9bbee', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:35:33', null, null);
-INSERT INTO `sys_log` VALUES ('e3b531fa12e47ac19a2ab0c883dee595', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:40:13', null, null);
-INSERT INTO `sys_log` VALUES ('18eafaeec588403245269a41732d1a74', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:45:14', null, null);
-INSERT INTO `sys_log` VALUES ('99357d793f2507cfb7b270677b4fe56c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:46:42', null, null);
-INSERT INTO `sys_log` VALUES ('b38f42f4e15ee72e494bdf6f6feb0ae7', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:49:58', null, null);
-INSERT INTO `sys_log` VALUES ('bfe758860662ae07a15598396a12cfaa', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:50:00', null, null);
-INSERT INTO `sys_log` VALUES ('69a7a5b960d6aedda5c4bd8b877be0a8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:50:48', null, null);
-INSERT INTO `sys_log` VALUES ('4084f184160940a96e47d7be1fab4ea3', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:51:11', null, null);
-INSERT INTO `sys_log` VALUES ('1241cf8e9fd0e28478a07bf755f528c5', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:51:12', null, null);
-INSERT INTO `sys_log` VALUES ('e0da357be27d66de1c9e9b8ecb22f9f9', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:51:13', null, null);
-INSERT INTO `sys_log` VALUES ('9f4960f89a10d7fdcf22d1ea46143fff', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:51:13', null, null);
-INSERT INTO `sys_log` VALUES ('ab8a71b7565d356d12e12c6730b0ceb0', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:51:13', null, null);
-INSERT INTO `sys_log` VALUES ('35fdedc363d9fe514b44095da40f170b', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:51:30', null, null);
-INSERT INTO `sys_log` VALUES ('7126b35521cd0dba932e6f04b0dac88f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:52:22', null, null);
-INSERT INTO `sys_log` VALUES ('9bd6e11c5a2f0bb70215cfa097a4b29c', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 10:57:52', null, null);
-INSERT INTO `sys_log` VALUES ('7e2edea80050d2e46aa2e8faef8e29ce', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:01:38', null, null);
-INSERT INTO `sys_log` VALUES ('190eb7b4d493eb01b13c5b97916eeb13', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:09:05', null, null);
-INSERT INTO `sys_log` VALUES ('ea268ad02db29012b2f1bd3d4aea1419', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:10:22', null, null);
-INSERT INTO `sys_log` VALUES ('7dc498b45fbf25c59686d9dda0d3eb66', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:12:38', null, null);
-INSERT INTO `sys_log` VALUES ('583d3aa445d408f4ecd19ee0a85514af', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:18:04', null, null);
-INSERT INTO `sys_log` VALUES ('9cea908c7a78dc77fdaed975819983bd', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:20:15', null, null);
-INSERT INTO `sys_log` VALUES ('d70329497664391dabc25effe7406c50', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:25:12', null, null);
-INSERT INTO `sys_log` VALUES ('0b9940fc5487026a3f16cade73efead5', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:28:28', null, null);
-INSERT INTO `sys_log` VALUES ('f21f9f700bf4f5bd9edda7a16ed338f8', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:30:05', null, null);
-INSERT INTO `sys_log` VALUES ('f5c08b45885d248c422a5d406cd5f223', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:41:54', null, null);
-INSERT INTO `sys_log` VALUES ('e9a31bfc128b3f5ae01656916c605ddb', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:44:56', null, null);
-INSERT INTO `sys_log` VALUES ('6baccd034e970c6f109791cff43bc327', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:46:12', null, null);
-INSERT INTO `sys_log` VALUES ('d2b516c5d834bd0fca91cda416fe499e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:46:42', null, null);
-INSERT INTO `sys_log` VALUES ('f9abb524e0dc3571571dc6e50ec6db75', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:47:13', null, null);
-INSERT INTO `sys_log` VALUES ('d1111594fef195980370c5f91ccf9212', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:48:09', null, null);
-INSERT INTO `sys_log` VALUES ('9174fe77fe8ba69243f72d5577b391d3', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:48:38', null, null);
-INSERT INTO `sys_log` VALUES ('2ab9cf95ac35fdbb8fe976e13c404c41', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:49:05', null, null);
-INSERT INTO `sys_log` VALUES ('9be945480d69038865279f02df5cee45', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:49:47', null, null);
-INSERT INTO `sys_log` VALUES ('c2bfe3b92e6bfb7016cc82e95419a602', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 11:54:05', null, null);
-INSERT INTO `sys_log` VALUES ('7c310b99a84411798a2aaf4074a28e7e', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 12:42:57', null, null);
-INSERT INTO `sys_log` VALUES ('b23293288a84ba965509f466ed0e7e2f', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 12:43:11', null, null);
-INSERT INTO `sys_log` VALUES ('cf590576a5f6a42b347e6b5bf5ebf5bd', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 12:43:31', null, null);
-INSERT INTO `sys_log` VALUES ('b5df1807f08af5db640da11affec24d3', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 12:49:25', null, null);
-INSERT INTO `sys_log` VALUES ('2746af3dd0309cdeeff7d27999fbcda1', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 12:52:55', null, null);
-INSERT INTO `sys_log` VALUES ('2a383edf5445dc8493f5240144ca72f5', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 12:56:05', null, null);
-INSERT INTO `sys_log` VALUES ('d2910961a0ff046cc3ef6cf8d33a8094', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 15:38:47', null, null);
-INSERT INTO `sys_log` VALUES ('00f763e007e5a6bddf4cb8e562a53005', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 15:41:31', null, null);
-INSERT INTO `sys_log` VALUES ('8ab131214232450ca202103ef81f0a2d', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 15:46:29', null, null);
-INSERT INTO `sys_log` VALUES ('606cb4f81f9bb412e2b2bdaa0f3e5dda', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 16:27:23', null, null);
-INSERT INTO `sys_log` VALUES ('7b85fba62bc001773fff1a54e1609aef', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 16:28:20', null, null);
-INSERT INTO `sys_log` VALUES ('b3127e34f395e1f1790450da5689a4a1', '1', '用户名: admin,登录成功！', null, null, null, '127.0.0.1', null, null, null, null, null, 'jx_boot', '2019-02-25 16:28:35', null, null);
-
--- ----------------------------
 -- Table structure for sys_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_permission`;
@@ -842,7 +402,7 @@ CREATE TABLE `sys_permission` (
   `create_time` datetime default NULL COMMENT '创建时间',
   `update_by` varchar(255) default NULL COMMENT '更新人',
   `update_time` datetime default NULL COMMENT '更新时间',
-  `del_flag` int(11) default '0' COMMENT '删除状态 0正常 1已删除',
+  `is_deleted` char(1) default '0' COMMENT '删除状态 0正常 1已删除',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单权限表';
 
@@ -916,7 +476,7 @@ CREATE TABLE `sys_quartz_job` (
   `id` varchar(255) NOT NULL,
   `create_by` varchar(255) default NULL COMMENT '创建人',
   `create_time` datetime default NULL COMMENT '创建时间',
-  `del_flag` int(11) default NULL COMMENT '删除状态',
+  `is_deleted` char(1) default '0' COMMENT '删除状态',
   `update_by` varchar(255) default NULL COMMENT '修改人',
   `update_time` datetime default NULL COMMENT '修改时间',
   `job_class_name` varchar(255) default NULL COMMENT '任务类名',
@@ -1278,8 +838,8 @@ INSERT INTO `sys_role_permission` VALUES ('fed41a4671285efb266cd404f24dd378', '5
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `id` varchar(32) NOT NULL COMMENT '主键id',
-  `username` varchar(100) default NULL COMMENT '登录账号',
-  `realname` varchar(255) default NULL COMMENT '真实姓名',
+  `login_name` varchar(100) default NULL COMMENT '登录账号',
+  `username` varchar(255) default NULL COMMENT '真实姓名',
   `password` varchar(255) default NULL COMMENT '密码',
   `salt` varchar(45) default NULL COMMENT 'md5密码盐',
   `avatar` varchar(255) default NULL COMMENT '头像',
@@ -1288,7 +848,7 @@ CREATE TABLE `sys_user` (
   `email` varchar(45) default NULL COMMENT '电子邮件',
   `phone` varchar(45) default NULL COMMENT '电话',
   `status` int(11) default NULL COMMENT '状态(1：正常  2：冻结 ）',
-  `del_flag` varchar(255) default NULL COMMENT '删除状态（0，正常，1已删除）',
+  `is_deleted` char(1) default '0' COMMENT '删除状态（0，正常，1已删除）',
   `create_by` varchar(255) default NULL COMMENT '创建人',
   `create_time` datetime default NULL COMMENT '创建时间',
   `update_by` varchar(255) default NULL COMMENT '更新人',
@@ -1299,25 +859,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('a75d45a015c44384a04449ee80dc3503', 'jeecg', 'jeecg', '3dd8371f3cf8240e', 'vDDkDzrK', 'user/20190220/e1fe9925bc315c60addea1b98eb1cb1349547719_1550656892940.jpg', null, null, null, null, '1', '0', 'admin', '2019-02-13 16:02:36', 'admin', '2019-02-20 18:30:50');
 INSERT INTO `sys_user` VALUES ('e9ca23d68d884d4ebb19d07889727dae', 'admin', '管理员', 'cb362cfeefbf3d8d', 'RCGTeGiH', 'user/20190119/logo-2_1547868176839.png', '2018-12-05 00:00:00', '1', '11@qq.com', '18566666666', '1', '0', null, '2018-12-21 17:54:10', 'admin', '2019-01-19 23:38:10');
-
--- ----------------------------
--- Table structure for sys_user_depart
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_depart`;
-CREATE TABLE `sys_user_depart` (
-  `ID` varchar(32) NOT NULL COMMENT 'id',
-  `user_id` varchar(32) default NULL COMMENT '用户id',
-  `dep_id` varchar(32) default NULL COMMENT '部门id',
-  PRIMARY KEY  (`ID`),
-  KEY `userid` (`user_id`),
-  KEY `orgid` (`dep_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_user_depart
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -1333,10 +875,4 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('0eba8656e7466ecc9504ea23c2466492', 'a75d45a015c44384a04449ee80dc3503', 'ee8626f80f7c2619917b6236f3a7f02b');
-INSERT INTO `sys_user_role` VALUES ('0ede6d23d53bc7dc990346ff14faabee', '3db4cf42353f4e868b7ccfeef90505d2', 'ee8626f80f7c2619917b6236f3a7f02b');
 INSERT INTO `sys_user_role` VALUES ('469eb183e8fc8cac5ad1963e53fb59fa', 'e9ca23d68d884d4ebb19d07889727dae', 'f6817f48af4fb3af11b9e8bf182f618b');
-INSERT INTO `sys_user_role` VALUES ('b3ffd9311a1ca296c44e2409b547384f', '01b802058ea94b978a2c96f4807f6b48', '1');
-INSERT INTO `sys_user_role` VALUES ('ee45d0343ecec894b6886effc92cb0b7', '4d8fef4667574b24a9ccfedaf257810c', 'f6817f48af4fb3af11b9e8bf182f618b');
-INSERT INTO `sys_user_role` VALUES ('f2922a38ba24fb53749e45a0c459adb3', '439ae3e9bcf7418583fcd429cadb1d72', '1');
-INSERT INTO `sys_user_role` VALUES ('f72c6190b0722e798147e73c776c6ac9', '439ae3e9bcf7418583fcd429cadb1d72', 'ee8626f80f7c2619917b6236f3a7f02b');

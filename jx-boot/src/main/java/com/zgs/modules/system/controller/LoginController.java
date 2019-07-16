@@ -1,5 +1,6 @@
 package com.zgs.modules.system.controller;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.zgs.modules.shiro.authc.util.JwtUtil;
 import com.zgs.modules.system.entity.SysUser;
 import com.zgs.modules.system.model.SysLoginModel;
@@ -10,11 +11,6 @@ import com.zgs.common.constant.CommonConstant;
 import com.zgs.common.system.api.ISysBaseAPI;
 import com.zgs.common.util.PasswordUtil;
 import com.zgs.common.util.RedisUtil;
-import com.zgs.modules.shiro.authc.util.JwtUtil;
-import com.zgs.modules.system.entity.SysUser;
-import com.zgs.modules.system.model.SysLoginModel;
-import com.zgs.modules.system.service.ISysLogService;
-import com.zgs.modules.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,13 +22,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * @author scott
- * @since 2018-12-17
+ * 登录
+ * @author zgs
  */
 @RestController
 @RequestMapping("/sys")
 @Api("用户登录")
 public class LoginController {
+
 	@Autowired
 	private ISysUserService sysUserService;
 	@Autowired
@@ -45,25 +42,28 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ApiOperation("登录接口")
-	public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel) {
-		Result<JSONObject> result = new Result<JSONObject>();
+	public Result login(@RequestBody SysLoginModel sysLoginModel) {
+
 		String username = sysLoginModel.getUsername();
 		String password = sysLoginModel.getPassword();
 		SysUser sysUser = sysUserService.getUserByName(username);
-		if(sysUser==null) {
-			result.error500("该用户不存在");
+		if (sysUser == null) {
+
 			sysBaseAPI.addLog("登录失败，用户名:"+username+"不存在！", CommonConstant.LOG_TYPE_1, null);
-			return result;
-		}else {
+			return Result.fail("该用户不存在");
+
+		} else {
 			//密码验证
-			String userpassword = PasswordUtil.encrypt(username, password, sysUser.getSalt());
-			String syspassword = sysUser.getPassword();
-			if(!syspassword.equals(userpassword)) {
-				result.error500("用户名或密码错误");
-				return result;
+			String userPassword = PasswordUtil.encrypt(username, password, sysUser.getSalt());
+			String sysPassword = sysUser.getPassword();
+			if (!sysPassword.equals(userPassword)) {
+				return Result.fail("用户名或密码不正确");
 			}
+
+			String userId = sysUser.getId();
+
 			//生成token
-			String token = JwtUtil.sign(username, syspassword);
+			String token = JwtUtil.sign(userId, username, sysPassword);
 			redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
 			 //设置超时时间
 			redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME/1000);
@@ -71,11 +71,10 @@ public class LoginController {
 			JSONObject obj = new JSONObject();
 			obj.put("token", token);
 			obj.put("userInfo", sysUser);
-			result.setResult(obj);
-			result.success("登录成功");
 			sysBaseAPI.addLog("用户名: "+username+",登录成功！", CommonConstant.LOG_TYPE_1, null);
+
+			return Result.success(obj);
 		}
-		return result;
 	}
 	
 	/**
@@ -83,8 +82,8 @@ public class LoginController {
 	 * @return
 	 */
 	@GetMapping("loginfo")
-	public Result<JSONObject> loginfo() {
-		Result<JSONObject> result = new Result<JSONObject>();
+	public Result loginfo() {
+
 		JSONObject obj = new JSONObject();
 		// 获取系统访问记录
 		Long totalVisitCount = logService.findTotalVisitCount();
@@ -93,9 +92,8 @@ public class LoginController {
 		obj.put("todayVisitCount", todayVisitCount);
 		Long todayIp = logService.findTodayIp();
 		obj.put("todayIp", todayIp);
-		result.setResult(obj);
-		result.success("登录成功");
-		return result;
+
+		return Result.success(obj);
 	}
 
 }

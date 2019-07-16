@@ -12,10 +12,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import com.zgs.common.aspect.annotation.AutoLog;
 import com.zgs.common.util.IPUtils;
-import com.zgs.common.util.SpringContextUtils;
-import com.zgs.modules.system.entity.SysLog;
-import com.zgs.modules.system.entity.SysUser;
-import com.zgs.modules.system.service.ISysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
@@ -23,12 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
 
-
 /**
  * 系统日志，切面处理类
- * 
- * @author scott
- * @date 2018年1月14日
+ * @author zgs
  */
 @Aspect
 @Component
@@ -74,10 +67,10 @@ public class AutoLogAspect {
 
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
-		try{
+		try {
 			String params = JSONObject.toJSONString(args);
 			sysLog.setRequestParam(params);
-		}catch (Exception e){
+		} catch (Exception e){
 
 		}
 
@@ -88,10 +81,9 @@ public class AutoLogAspect {
 
 		//获取登录用户信息
 		SysUser sysUser = (SysUser)SecurityUtils.getSubject().getPrincipal();
-		if(sysUser!=null){
+		if (sysUser != null) {
 			sysLog.setUserid(sysUser.getUsername());
-			sysLog.setUsername(sysUser.getRealname());
-
+			sysLog.setUsername(sysUser.getUsername());
 		}
 		//耗时
 		sysLog.setCostTime(time);

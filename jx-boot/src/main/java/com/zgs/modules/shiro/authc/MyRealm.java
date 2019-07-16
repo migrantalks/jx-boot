@@ -18,7 +18,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import com.zgs.common.constant.CommonConstant;
 import com.zgs.common.util.RedisUtil;
 import com.zgs.common.util.oConvertUtils;
-import com.zgs.modules.shiro.authc.util.JwtUtil;
 import com.zgs.modules.system.entity.SysPermission;
 import com.zgs.modules.system.entity.SysUser;
 import com.zgs.modules.system.service.ISysPermissionService;
@@ -31,10 +30,9 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Scott
- * @create 2018-07-12 15:23
- * @desc
+ * @author zgs
  **/
+
 @Component
 @Slf4j
 public class MyRealm extends AuthorizingRealm {
@@ -99,7 +97,6 @@ public class MyRealm extends AuthorizingRealm {
 		for (SysPermission po : permissionList) {
 			if (oConvertUtils.isNotEmpty(po.getUrl()) || oConvertUtils.isNotEmpty(po.getPerms())) {
 				if (oConvertUtils.isNotEmpty(po.getUrl())) {
-					//TODO URL是怎么控制的？
 					permissionSet.add(po.getUrl());
 				} else if (oConvertUtils.isNotEmpty(po.getPerms())) {
 					permissionSet.add(po.getPerms());
@@ -115,7 +112,7 @@ public class MyRealm extends AuthorizingRealm {
 	/**
 	 * 获取身份验证信息 Shiro中，默认使用此方法进行用户名正确与否验证，错误抛出异常即可。
 	 * 
-	 * @param authenticationToken 用户身份信息 token
+	 * @param auth 用户身份信息 token
 	 * @return 返回封装了用户信息的 AuthenticationInfo 实例
 	 */
 	@Override
@@ -126,19 +123,20 @@ public class MyRealm extends AuthorizingRealm {
 			throw new AuthenticationException("token为空!");
 		}
 		// 解密获得username，用于和数据库进行对比
-		String username = JwtUtil.getUsername(token);
-		if (username == null) {
+		String userId = JwtUtil.getTokenInfo(token, "userId");
+		String userName = JwtUtil.getTokenInfo(token, "username");
+		if (userId == null) {
 			throw new AuthenticationException("token非法无效!");
 		}
 
 		// 查询用户信息
-		SysUser sysUser = sysUserService.getUserByName(username);
+		SysUser sysUser = sysUserService.getById(userId);
 		if (sysUser == null) {
 			throw new AuthenticationException("用户不存在!");
 		}
 
 		//校验token是否超时失效 & 或者账号密码是否错误
-		if (!jwtTokenRefresh(token, username, sysUser.getPassword())) {
+		if (!jwtTokenRefresh(token, userId, userName, sysUser.getPassword())) {
 			throw new AuthenticationException("用户名或密码错误!");
 		}
 
@@ -160,16 +158,16 @@ public class MyRealm extends AuthorizingRealm {
 	 * 6、每次当返回为true情况下，都会给Response的Header中设置Authorization，该Authorization映射的v为cache对应的v值。
 	 * 7、注：当前端接收到Response的Header中的Authorization值会存储起来，作为以后请求token使用
 	 * 
-	 * @param userName
+	 * @param userId
 	 * @param passWord
 	 * @return
 	 */
-	public boolean jwtTokenRefresh(String token, String userName, String passWord) {
+	public boolean jwtTokenRefresh(String token, String userId, String userName, String passWord) {
 		String cacheToken = String.valueOf(redisUtil.get(CommonConstant.PREFIX_USER_TOKEN + token));
 		if (oConvertUtils.isNotEmpty(cacheToken)) {
 			//校验token有效性
-			if (!JwtUtil.verify(token, userName, passWord)) {
-				String newAuthorization = JwtUtil.sign(userName, passWord);
+			if (!JwtUtil.verify(token, userId, passWord)) {
+				String newAuthorization = JwtUtil.sign(userId, userName, passWord);
 				redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);
 				 //设置超时时间
 				redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME/1000);

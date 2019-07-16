@@ -15,8 +15,7 @@ import org.springframework.util.StringUtils;
  * 
  * 类描述：时间操作定义类
  * 
- * @author: 张代浩 @date： 日期：2012-12-8 时间：下午12:15:03
- * @version 1.0
+ * @author: zgs
  */
 public class DateUtils extends PropertyEditorSupport {
 	// 各种时间格式

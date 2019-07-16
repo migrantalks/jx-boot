@@ -6,21 +6,14 @@ import java.util.Map;
 import com.zgs.modules.system.entity.SysDict;
 import com.zgs.modules.system.mapper.SysDictMapper;
 import com.zgs.modules.system.service.ISysDictService;
-import com.zgs.modules.system.entity.SysDict;
-import com.zgs.modules.system.mapper.SysDictMapper;
-import com.zgs.modules.system.service.ISysDictService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
  * 字典表 服务实现类
- * </p>
- *
- * @author zhangweijian
- * @since 2018-12-28
+ * @author zgs
  */
 @Service
 public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> implements ISysDictService {

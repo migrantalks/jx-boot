@@ -3,27 +3,23 @@ package com.zgs.modules.system.service;
 import java.util.List;
 
 import com.zgs.modules.system.entity.SysUser;
-import com.zgs.modules.system.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
  * 用户表 服务类
- * </p>
  *
- * @author scott
- * @since 2018-12-20
+ * @author zgs
  */
 public interface ISysUserService extends IService<SysUser> {
 	
-	public SysUser getUserByName(String username);
+	SysUser getUserByName(String username);
 	
 	/**
 	 * 添加用户和用户角色关系
 	 * @param user
 	 * @param roles
 	 */
-	public void addUserWithRole(SysUser user,String roles);
+	void addUserWithRole(SysUser user,String roles);
 	
 	
 	/**
@@ -31,12 +27,12 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @param user
 	 * @param roles
 	 */
-	public void editUserWithRole(SysUser user,String roles);
+	void editUserWithRole(SysUser user,String roles);
 
 	/**
 	 * 获取用户的授权角色
 	 * @param username
 	 * @return
 	 */
-	public List<String> getRole(String username);
+	List<String> getRole(String username);
 }

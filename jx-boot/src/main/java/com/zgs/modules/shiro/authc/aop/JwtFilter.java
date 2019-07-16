@@ -9,16 +9,13 @@ import com.zgs.modules.shiro.authc.JwtToken;
 import com.zgs.modules.shiro.vo.DefContants;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
-import com.zgs.modules.shiro.authc.JwtToken;
-import com.zgs.modules.shiro.vo.DefContants;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Scott
- * @create 2018-07-12 15:56
- * @desc   鉴权登录拦截器
+ * 鉴权登录拦截器
+ * @author zgs
  **/
 @Slf4j
 public class JwtFilter extends BasicHttpAuthenticationFilter {

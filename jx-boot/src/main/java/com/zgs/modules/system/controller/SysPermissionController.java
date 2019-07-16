@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.zgs.modules.shiro.authc.util.JwtUtil;
 import com.zgs.modules.system.entity.SysPermission;
 import com.zgs.modules.system.entity.SysRolePermission;
 import com.zgs.modules.system.model.SysPermissionTree;
@@ -19,18 +20,8 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import com.zgs.common.api.vo.Result;
 import com.zgs.common.util.MD5Util;
 import com.zgs.common.util.oConvertUtils;
-import com.zgs.modules.system.entity.SysPermission;
-import com.zgs.modules.system.entity.SysRolePermission;
-import com.zgs.modules.system.model.SysPermissionTree;
-import com.zgs.modules.system.model.TreeModel;
-import com.zgs.modules.system.service.ISysPermissionService;
-import com.zgs.modules.system.service.ISysRolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -40,12 +31,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <p>
  * 菜单权限表 前端控制器
- * </p>
- *
- * @author scott
- * @since 2018-12-21
+ * @author zgs
  */
 @Slf4j
 @RestController
@@ -58,28 +45,28 @@ public class SysPermissionController {
 	@Autowired
 	private ISysRolePermissionService sysRolePermissionService;
 	
-	
 	/**
 	 * 加载数据节点
 	 * @return
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Result<List<SysPermissionTree>> list() {
-		//@RequestParam(name="pid",required=false) String parentId
-		Result<List<SysPermissionTree>> result = new Result<>();
+	@GetMapping("/list")
+	public Result list() {
+
 		try {
+
 			LambdaQueryWrapper<SysPermission> query = new LambdaQueryWrapper<SysPermission>();
-			query.eq(SysPermission::getDelFlag, 0);
+			query.eq(SysPermission::getIsDeleted, 0);
 			query.orderByAsc(SysPermission::getSortNo);
 			List<SysPermission> list = sysPermissionService.list(query);
 			List<SysPermissionTree> treeList = new ArrayList<>();
 			getTreeList(treeList, list, null);
-			result.setResult(treeList);
-			result.setSuccess(true);
+
+			return Result.success(treeList);
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
 	
@@ -87,75 +74,78 @@ public class SysPermissionController {
 	 *  查询用户的权限
 	 * @return
 	 */
-	@RequestMapping(value = "/queryByUser", method = RequestMethod.GET)
-	public Result<JSONArray> queryByUser(HttpServletRequest req) {
-		Result<JSONArray> result = new Result<>();
+	@GetMapping("/queryByUser")
+	public Result queryByUser(HttpServletRequest req) {
+
 		try {
 			String username = req.getParameter("username");
 			List<SysPermission> metaList = sysPermissionService.queryByUser(username);
 			JSONArray jsonArray = new JSONArray();
 			this.getPermissionJsonArray(jsonArray, metaList, null);
-			result.setResult(jsonArray);
-			result.success("查询成功");
+			return Result.success(jsonArray);
+
 		} catch (Exception e) {
-			result.error500("查询失败:"+e.getMessage());
+
 			e.printStackTrace();
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
 
-	
-	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@PostMapping("/add")
 	@RequiresRoles({"admin"})
-	public Result<SysPermission> add(@RequestBody SysPermission permission) {
-		Result<SysPermission> result = new Result<SysPermission>();
+	public Result add(@RequestBody SysPermission permission, HttpServletRequest request) {
+
 		try {
-			sysPermissionService.addPermission(permission);
-			result.success("添加成功！");
+
+			String userId = JwtUtil.getUserToken(request, "userId");
+			sysPermissionService.addPermission(permission, userId);
+			return Result.success("添加成功！");
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			log.info(e.getMessage());
-			result.error500("操作失败");
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
+	@PutMapping("/edit")
 	@RequiresRoles({"admin"})
-	public Result<SysPermission> eidt(@RequestBody SysPermission permission) {
-		Result<SysPermission> result = new Result<>();
+	public Result edit(@RequestBody SysPermission permission, HttpServletRequest request) {
+
 		try {
-			sysPermissionService.editPermission(permission);
-			result.success("修改成功！");
+
+			String userId = JwtUtil.getUserToken(request, "userId");
+			sysPermissionService.editPermission(permission, userId);
+			return Result.success("修改成功！");
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			log.info(e.getMessage());
-			result.error500("操作失败");
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	@DeleteMapping("/delete")
 	@RequiresRoles({"admin"})
-	public Result<SysPermission> delete(@RequestParam(name="id",required=true) String id) {
-		Result<SysPermission> result = new Result<>();
+	public Result delete(@RequestParam(name="id") String id) {
+
 		try {
 			sysPermissionService.deletePermission(id);
-			result.success("删除成功!");
+			return Result.success("删除成功！");
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.error500(e.getMessage());
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
 	
-	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
+	@DeleteMapping("/deleteBatch")
 	@RequiresRoles({"admin"})
-	public Result<SysPermission> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		Result<SysPermission> result = new Result<>();
+	public Result deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		try {
 			String arr[] = ids.split(",");
 			for (String id : arr) {
@@ -163,104 +153,102 @@ public class SysPermissionController {
 					sysPermissionService.deletePermission(id);
 				}
 			}
-			result.success("删除成功!");
+			return Result.success("删除成功！");
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			result.error500("删除成功!");
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
 	/**
 	  *  获取全部的权限树
 	 * @return
 	 */
-	@RequestMapping(value = "/queryTreeList", method = RequestMethod.GET)
-	public Result<Map<String,Object>> queryTreeList() {
-		Result<Map<String,Object>> result = new Result<>();
+	@GetMapping(value = "/queryTreeList")
+	public Result queryTreeList() {
+
 		//全部权限ids
 		List<String> ids = new ArrayList<>();
 		try {
 			LambdaQueryWrapper<SysPermission> query = new LambdaQueryWrapper<SysPermission>();
-			query.eq(SysPermission::getDelFlag, 0);
+			query.eq(SysPermission::getIsDeleted, 0);
 			query.orderByAsc(SysPermission::getSortNo);
 			List<SysPermission> list = sysPermissionService.list(query);
 			for(SysPermission sysPer : list) {
 				ids.add(sysPer.getId());
 			}
 			
-			System.out.println(list.size());
 			List<TreeModel> treeList = new ArrayList<>();
 			getTreeModelList(treeList, list, null);
 			
 			Map<String,Object> resMap = new HashMap<String,Object>();
 			resMap.put("treeList", treeList); //全部树节点数据
 			resMap.put("ids", ids);//全部树ids
-			result.setResult(resMap);
-			result.setSuccess(true);
+			return Result.success(resMap);
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
+
 	/**
 	 * 异步加载数据节点
 	 * @return
 	 */
-	@RequestMapping(value = "/queryListAsync", method = RequestMethod.GET)
-	public Result<List<TreeModel>> queryAsync(@RequestParam(name="pid",required=false) String parentId) {
-		Result<List<TreeModel>> result = new Result<>();
+	@GetMapping("/queryListAsync")
+	public Result queryAsync(@RequestParam(name="pid",required=false) String parentId) {
+
 		try {
 			List<TreeModel> list = sysPermissionService.queryListByParentId(parentId);
-			if(list==null||list.size()<=0) {
-				result.error500("未找到角色信息");
-			}else {
-				result.setResult(list);
-				result.setSuccess(true);
+			if (list == null || list.size() <= 0) {
+				return Result.fail("未找到角色信息");
+
+			} else {
+
+				return Result.success(list);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return Result.fail(e.getMessage());
 		}
-		
-		return result;
 	}
-	
-	
 	
 	/**
 	  *  查询角色授权
 	 * @return
 	 */
-	@RequestMapping(value = "/queryRolePermission", method = RequestMethod.GET)
-	public Result<List<String>> queryRolePermission(@RequestParam(name="roleId",required=true) String roleId) {
-		Result<List<String>> result = new Result<>();
+	@GetMapping("/queryRolePermission")
+	public Result queryRolePermission(@RequestParam(name="roleId",required=true) String roleId) {
+
 		try {
 			List<SysRolePermission> list = sysRolePermissionService.list(new QueryWrapper<SysRolePermission>().lambda().eq(SysRolePermission::getRoleId, roleId));
-			result.setResult(list.stream().map(SysRolePermission -> String.valueOf(SysRolePermission.getPermissionId())).collect(Collectors.toList()));
-			result.setSuccess(true);
+			return Result.success(list.stream().map(SysRolePermission -> String.valueOf(SysRolePermission.getPermissionId())).collect(Collectors.toList()));
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
 	/**
 	  *  保存角色授权
 	 * @return
 	 */
-	@RequestMapping(value = "/saveRolePermission", method = RequestMethod.POST)
-	public Result<String> saveRolePermission(@RequestBody JSONObject json) {
-		Result<String> result = new Result<>();
+	@PostMapping("/saveRolePermission")
+	public Result saveRolePermission(@RequestBody JSONObject json) {
+
 		try {
 			String roleId = json.getString("roleId");
 			String permissionIds = json.getString("permissionIds");
 			this.sysRolePermissionService.saveRolePermission(roleId, permissionIds);
-			result.success("保存成功！");
+			return Result.success("保存成功！");
+
 		} catch (Exception e) {
-			result.error500("授权失败！");
 			e.printStackTrace();
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 	
 	

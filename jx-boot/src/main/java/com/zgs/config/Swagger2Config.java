@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zgs.modules.shiro.vo.DefContants;
-import com.zgs.modules.shiro.vo.DefContants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -24,7 +23,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @author scott
+ * swagger 配置
+ * @author zgs
  */
 @Slf4j
 @Configuration

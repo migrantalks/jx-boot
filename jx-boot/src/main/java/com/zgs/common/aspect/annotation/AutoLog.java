@@ -11,8 +11,7 @@ import com.zgs.common.constant.CommonConstant;
 /**
  * 系统日志注解
  * 
- * @author scott
- * @date 2019年1月14日
+ * @author zgs
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

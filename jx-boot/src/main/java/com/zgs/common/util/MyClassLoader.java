@@ -1,7 +1,7 @@
 package com.zgs.common.util;
 
 /**
- * @author  张代浩
+ * @author  zgs
  */
 public class MyClassLoader extends ClassLoader {
 	public static Class getClassByScn(String className) {

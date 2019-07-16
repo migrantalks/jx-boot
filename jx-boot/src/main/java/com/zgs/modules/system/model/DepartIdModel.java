@@ -33,7 +33,7 @@ public class DepartIdModel implements Serializable {
      * @param treeModel
      * @return
      */
-    public DepartIdModel convert(SysDepartTreeModel treeModel) {
+    public DepartIdModel convert(SysDeptTreeModel treeModel) {
         this.key = treeModel.getId();
         this.value = treeModel.getId();
         this.title = treeModel.getDepartName();

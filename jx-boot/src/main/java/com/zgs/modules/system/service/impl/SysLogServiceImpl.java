@@ -5,20 +5,14 @@ import javax.annotation.Resource;
 import com.zgs.modules.system.entity.SysLog;
 import com.zgs.modules.system.mapper.SysLogMapper;
 import com.zgs.modules.system.service.ISysLogService;
-import com.zgs.modules.system.entity.SysLog;
-import com.zgs.modules.system.mapper.SysLogMapper;
-import com.zgs.modules.system.service.ISysLogService;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
- * <p>
  * 系统日志表 服务实现类
- * </p>
  *
- * @author zhangweijian
- * @since 2018-12-26
+ * @author zgs
  */
 @Service
 public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements ISysLogService {

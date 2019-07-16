@@ -8,7 +8,7 @@ import org.jeecgframework.codegenerate.generate.pojo.TableVo;
  * jx_boot代码生成器
  * 功能说明： 一键生成增删改查所有代码（包括：controller、service、dao、mapper、entity、vue）
  * 自定义模板： 模板位置在/src/main/resources/jeecg/code-template
- * @author scott
+ * @author zgs
  *
  */
 public class CodeGenerator {

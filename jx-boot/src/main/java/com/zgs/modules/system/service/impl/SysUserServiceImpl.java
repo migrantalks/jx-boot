@@ -1,31 +1,23 @@
 package com.zgs.modules.system.service.impl;
 
 import java.util.List;
-import java.util.UUID;
 
+import com.zgs.common.util.IdGen;
 import com.zgs.modules.system.entity.SysUser;
 import com.zgs.modules.system.entity.SysUserRole;
 import com.zgs.modules.system.mapper.SysUserMapper;
 import com.zgs.modules.system.mapper.SysUserRoleMapper;
 import com.zgs.modules.system.service.ISysUserService;
 import com.zgs.common.util.oConvertUtils;
-import com.zgs.modules.system.entity.SysUser;
-import com.zgs.modules.system.entity.SysUserRole;
-import com.zgs.modules.system.mapper.SysUserMapper;
-import com.zgs.modules.system.mapper.SysUserRoleMapper;
-import com.zgs.modules.system.service.ISysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
  * 用户表 服务实现类
- * </p>
  *
- * @author scott
- * @since 2018-12-20
+ * @author zgs
  */
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
@@ -44,10 +36,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	
 	@Override
 	public void addUserWithRole(SysUser user, String roles) {
-		String id =UUID.randomUUID().toString().replace("-", "");
+		String id = IdGen.uuid();
 		user.setId(id);
 		this.save(user);
-		if(oConvertUtils.isNotEmpty(roles)) {
+
+		if (oConvertUtils.isNotEmpty(roles)) {
 			String[] arr = roles.split(",");
 			for (String roleId : arr) {
 				SysUserRole userRole = new SysUserRole(id, roleId);

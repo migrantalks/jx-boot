@@ -11,12 +11,8 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
  * 字典表
- * </p>
- *
- * @author zhangweijian
- * @since 2018-12-28
+ * @author zgs
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -49,7 +45,7 @@ public class SysDict implements Serializable {
     /**
      * 删除状态
      */
-    private Integer delFlag;
+    private String isDeleted;
 
     /**
      * 创建人

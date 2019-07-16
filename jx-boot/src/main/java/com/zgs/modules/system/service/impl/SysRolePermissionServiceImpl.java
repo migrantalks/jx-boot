@@ -7,9 +7,6 @@ import com.zgs.modules.system.entity.SysRolePermission;
 import com.zgs.modules.system.mapper.SysRolePermissionMapper;
 import com.zgs.modules.system.service.ISysRolePermissionService;
 import com.zgs.common.util.oConvertUtils;
-import com.zgs.modules.system.entity.SysRolePermission;
-import com.zgs.modules.system.mapper.SysRolePermissionMapper;
-import com.zgs.modules.system.service.ISysRolePermissionService;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,12 +14,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
  * 角色权限表 服务实现类
- * </p>
  *
- * @author scott
- * @since 2018-12-21
+ * @author zgs
  */
 @Service
 public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionMapper, SysRolePermission> implements ISysRolePermissionService {

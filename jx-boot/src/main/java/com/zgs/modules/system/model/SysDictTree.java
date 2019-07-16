@@ -55,7 +55,7 @@ public class SysDictTree implements Serializable {
     /**
      * 删除状态
      */
-    private Integer delFlag;
+    private String isDeleted;
 
     /**
      * 创建人
@@ -83,7 +83,7 @@ public class SysDictTree implements Serializable {
 		this.title = node.getDictName();
 		this.dictCode = node.getDictCode();
 		this.description = node.getDescription();
-		this.delFlag = node.getDelFlag();
+		this.isDeleted = node.getIsDeleted();
 	}
     
 }

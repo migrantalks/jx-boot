@@ -11,9 +11,8 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Scott
- * @create 2019-02-01 15:56
- * @desc   鉴权请求URL访问权限拦截器
+ * 鉴权请求URL访问权限拦截器
+ * @author zgs
  */
 @Slf4j
 public class ResourceCheckFilter extends AccessControlFilter {

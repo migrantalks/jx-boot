@@ -16,16 +16,13 @@ import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.shiro.SecurityUtils;
-import com.zgs.common.util.oConvertUtils;
-import com.zgs.modules.system.entity.SysUser;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * mybatis拦截器，自动注入创建人、创建时间、修改人、修改时间
- * @author scott
- * @date  2019-01-19
+ * @author zgs
  *
  */
 @Slf4j

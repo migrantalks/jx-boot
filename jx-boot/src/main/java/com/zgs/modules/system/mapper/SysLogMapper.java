@@ -1,16 +1,12 @@
 package com.zgs.modules.system.mapper;
 
 import com.zgs.modules.system.entity.SysLog;
-import com.zgs.modules.system.entity.SysLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>
  * 系统日志表 Mapper 接口
- * </p>
  *
- * @author zhangweijian
- * @since 2018-12-26
+ * @author zgs
  */
 public interface SysLogMapper extends BaseMapper<SysLog> {
 

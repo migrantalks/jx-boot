@@ -14,12 +14,8 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
  * 用户表
- * </p>
- *
- * @author scott
- * @since 2018-12-20
+ * @author zgs
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,12 +33,12 @@ public class SysUser implements Serializable {
     /**
      * 登录账号
      */
-    private String username;
+    private String loginName;
 
     /**
      * 真实姓名
      */
-    private String realname;
+    private String username;
 
     /**
      * 密码
@@ -89,7 +85,7 @@ public class SysUser implements Serializable {
     /**
      * 删除状态（0，正常，1已删除）
      */
-    private String delFlag;
+    private String isDeleted;
 
     /**
      * 创建人

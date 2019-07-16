@@ -12,16 +12,12 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * <p>
  * 部门表
- * <p>
- * 
- * @author Steve
- * @Since  2019-01-22
+ * @author zgs
  */
 @Data
-@TableName("sys_depart")
-public class SysDepart implements Serializable {
+@TableName("sys_dept")
+public class SysDept implements Serializable {
     private static final long serialVersionUID = 1L;
     
 	/**ID*/
@@ -54,7 +50,7 @@ public class SysDepart implements Serializable {
 	/**状态（1启用，0不启用）*/
 	private String status;
 	/**删除状态（0，正常，1已删除）*/
-	private String delFlag;
+	private String isDeleted;
 	/**创建人*/
 	private String createBy;
 	/**创建日期*/
@@ -82,7 +78,7 @@ public class SysDepart implements Serializable {
         if (!super.equals(o)) {
 			return false;
 		}
-        SysDepart depart = (SysDepart) o;
+        SysDept depart = (SysDept) o;
         return Objects.equals(id, depart.id) &&
                 Objects.equals(parentId, depart.parentId) &&
                 Objects.equals(departName, depart.departName) &&
@@ -97,7 +93,7 @@ public class SysDepart implements Serializable {
                 Objects.equals(address, depart.address) &&
                 Objects.equals(memo, depart.memo) &&
                 Objects.equals(status, depart.status) &&
-                Objects.equals(delFlag, depart.delFlag) &&
+                Objects.equals(isDeleted, depart.isDeleted) &&
                 Objects.equals(createBy, depart.createBy) &&
                 Objects.equals(createTime, depart.createTime) &&
                 Objects.equals(updateBy, depart.updateBy) &&
@@ -112,7 +108,7 @@ public class SysDepart implements Serializable {
 
         return Objects.hash(super.hashCode(), id, parentId, departName, 
         		departNameEn, departNameAbbr, departOrder, description, 
-        		orgType, orgCode, mobile, fax, address, memo, status, 
-        		delFlag, createBy, createTime, updateBy, updateTime);
+        		orgType, orgCode, mobile, fax, address, memo, status,
+				isDeleted, createBy, createTime, updateBy, updateTime);
     }
 }

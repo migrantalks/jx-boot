@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.zgs.modules.quartz.entity.QuartzJob;
 import com.zgs.common.api.vo.Result;
 import com.zgs.common.constant.CommonConstant;
-import com.zgs.common.exception.JeecgBootException;
+import com.zgs.common.exception.ServiceException;
 import com.zgs.common.util.oConvertUtils;
-import com.zgs.modules.quartz.entity.QuartzJob;
 import com.zgs.modules.quartz.service.IQuartzJobService;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -23,11 +22,7 @@ import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -37,16 +32,14 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Title: Controller
- * @Description: 定时任务在线管理 
- * @author： jx_boot
- * @date：     2019-01-02 
- * @version：V1.0
+ * 定时任务在线管理
+ * @author： zgs
  */
 @RestController
 @RequestMapping("/sys/quartzJob")
 @Slf4j
 public class QuartzJobController {
+
 	@Autowired
 	private IQuartzJobService quartzJobService;
 	@Autowired
@@ -61,12 +54,15 @@ public class QuartzJobController {
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Result<IPage<QuartzJob>> queryPageList(QuartzJob quartzJob, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
-                                                  @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, HttpServletRequest req) {
-		Result<IPage<QuartzJob>> result = new Result<IPage<QuartzJob>>();
+	@GetMapping(value = "/list")
+	public Result queryPageList(QuartzJob quartzJob,
+								@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+								@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+								HttpServletRequest req) {
+
 		QueryWrapper<QuartzJob> queryWrapper = new QueryWrapper<QuartzJob>(quartzJob);
 		Page<QuartzJob> page = new Page<QuartzJob>(pageNo, pageSize);
+
 		// 排序逻辑 处理
 		String column = req.getParameter("column");
 		String order = req.getParameter("order");
@@ -77,14 +73,9 @@ public class QuartzJobController {
 				queryWrapper.orderByDesc(oConvertUtils.camelToUnderline(column));
 			}
 		}
+
 		IPage<QuartzJob> pageList = quartzJobService.page(page, queryWrapper);
-//		log.info("查询当前页：" + pageList.getCurrent());
-//		log.info("查询当前页数量：" + pageList.getSize());
-//		log.info("查询结果数量：" + pageList.getRecords().size());
-//		log.info("数据总数：" + pageList.getTotal());
-		result.setSuccess(true);
-		result.setResult(pageList);
-		return result;
+		return Result.success(pageList);
 	}
 
 	/**
@@ -93,27 +84,28 @@ public class QuartzJobController {
 	 * @param quartzJob
 	 * @return
 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Result<?> add(@RequestBody QuartzJob quartzJob) {
-		Result<QuartzJob> result = new Result<QuartzJob>();
+	@PostMapping(value = "/add")
+	public Result add(@RequestBody QuartzJob quartzJob) {
 
 		List<QuartzJob> list = quartzJobService.findByJobClassName(quartzJob.getJobClassName());
 		if (list != null && list.size() > 0) {
-			return Result.error("该定时任务类名已存在");
+			return Result.fail("该定时任务类名已存在");
 		}
+
 		try {
+
 			schedulerAdd(quartzJob.getJobClassName().trim(), quartzJob.getCronExpression().trim(), quartzJob.getParameter());
-			//
 			quartzJob.setDelFlag(CommonConstant.DEL_FLAG_0);
 			quartzJob.setStatus(CommonConstant.STATUS_NORMAL);
 			quartzJobService.save(quartzJob);
-			result.success("创建定时任务成功");
+			return Result.success("创建定时任务成功");
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			log.info(e.getMessage());
-			result.error500("创建定时任务失败，"+e.getMessage());
+			return Result.fail(e.getMessage());
 		}
-		return result;
 	}
 
 	/**
@@ -122,23 +114,24 @@ public class QuartzJobController {
 	 * @param quartzJob
 	 * @return
 	 */
-	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
-	public Result<QuartzJob> eidt(@RequestBody QuartzJob quartzJob) {
-		Result<QuartzJob> result = new Result<QuartzJob>();
+	@PutMapping(value = "/edit")
+	public Result edit(@RequestBody QuartzJob quartzJob) {
+
 		QuartzJob quartzJobEntity = quartzJobService.getById(quartzJob.getId());
 		if (quartzJobEntity == null) {
-			result.error500("未找到对应实体");
+			return Result.fail("未找到对应实体");
 		} else {
+
 			schedulerDelete(quartzJob.getJobClassName().trim());
-			if(CommonConstant.STATUS_NORMAL == quartzJob.getStatus()) {
+			if (CommonConstant.STATUS_NORMAL == quartzJob.getStatus()) {
 				schedulerAdd(quartzJob.getJobClassName().trim(), quartzJob.getCronExpression().trim(), quartzJob.getParameter());
 			}
 			boolean ok = quartzJobService.updateById(quartzJob);
 			if (ok) {
-				result.success("更新定时任务成功!");
+				return Result.success("更新定时任务成功!");
 			}
 		}
-		return result;
+		return Result.fail("跟新失败");
 	}
 
 	/**
@@ -147,22 +140,23 @@ public class QuartzJobController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public Result<QuartzJob> delete(@RequestParam(name = "id", required = true) String id) {
-		Result<QuartzJob> result = new Result<QuartzJob>();
+	@DeleteMapping(value = "/delete")
+	public Result delete(@RequestParam(name = "id", required = true) String id) {
+
 		QuartzJob quartzJob = quartzJobService.getById(id);
 		if (quartzJob == null) {
-			result.error500("未找到对应实体");
+			return Result.fail("未找到对应实体");
+
 		} else {
 			QuartzJob job = quartzJobService.getById(id);
 			schedulerDelete(job.getJobClassName().trim());
 			boolean ok = quartzJobService.removeById(id);
 			if (ok) {
-				result.success("删除成功!");
+				return Result.success("删除成功!");
 			}
 		}
 
-		return result;
+		return Result.success("删除失败!");
 	}
 
 	/**
@@ -171,20 +165,22 @@ public class QuartzJobController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
-	public Result<QuartzJob> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
-		Result<QuartzJob> result = new Result<QuartzJob>();
+	@DeleteMapping(value = "/deleteBatch")
+	public Result deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
+
 		if (ids == null || "".equals(ids.trim())) {
-			result.error500("参数不识别！");
+			return Result.fail("参数不识别！");
+
 		} else {
+
 			for (String id : Arrays.asList(ids.split(","))) {
 				QuartzJob job = quartzJobService.getById(id);
 				schedulerDelete(job.getJobClassName().trim());
 				quartzJobService.removeById(id);
 			}
-			result.success("删除定时任务成功!");
+
+			return Result.success("删除成功!");
 		}
-		return result;
 	}
 
 	/**
@@ -192,18 +188,18 @@ public class QuartzJobController {
 	 * @param job
 	 * @return
 	 */
-	@RequestMapping(value = "/pause", method = RequestMethod.POST)
+	@PostMapping(value = "/pause")
 	@ApiOperation(value = "暂停定时任务")
-	public Result<Object> pauseJob(@RequestBody QuartzJob job) {
+	public Result pauseJob(@RequestBody QuartzJob job) {
 
 		try {
 			scheduler.pauseJob(JobKey.jobKey(job.getJobClassName().trim()));
 		} catch (SchedulerException e) {
-			throw new JeecgBootException("暂停定时任务失败");
+			throw new ServiceException("暂停定时任务失败");
 		}
 		job.setStatus(CommonConstant.STATUS_DISABLE);
 		quartzJobService.updateById(job);
-		return Result.ok("暂停定时任务成功");
+		return Result.success("暂停定时任务成功");
 	}
 
 	/**
@@ -211,18 +207,19 @@ public class QuartzJobController {
 	 * @param job
 	 * @return
 	 */
-	@RequestMapping(value = "/resume", method = RequestMethod.POST)
+	@PostMapping(value = "/resume")
 	@ApiOperation(value = "恢复定时任务")
-	public Result<Object> resumeJob(@RequestBody QuartzJob job) {
+	public Result resumeJob(@RequestBody QuartzJob job) {
 
 		try {
 			scheduler.resumeJob(JobKey.jobKey(job.getJobClassName().trim()));
 		} catch (SchedulerException e) {
-			throw new JeecgBootException("恢复定时任务失败");
+			throw new ServiceException("恢复定时任务失败");
 		}
+
 		job.setStatus(CommonConstant.STATUS_NORMAL);
 		quartzJobService.updateById(job);
-		return Result.ok("恢复定时任务成功");
+		return Result.success("恢复定时任务成功");
 	}
 
 	/**
@@ -231,17 +228,17 @@ public class QuartzJobController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/queryById", method = RequestMethod.GET)
-	public Result<QuartzJob> queryById(@RequestParam(name = "id", required = true) String id) {
-		Result<QuartzJob> result = new Result<QuartzJob>();
+	@GetMapping(value = "/queryById")
+	public Result queryById(@RequestParam(name = "id", required = true) String id) {
+
 		QuartzJob quartzJob = quartzJobService.getById(id);
 		if (quartzJob == null) {
-			result.error500("未找到对应实体");
+			return Result.fail("未找到对应实体");
+
 		} else {
-			result.setResult(quartzJob);
-			result.setSuccess(true);
+
+			return Result.success(quartzJob);
 		}
-		return result;
 	}
 
 	/**
@@ -269,9 +266,9 @@ public class QuartzJobController {
 			scheduler.scheduleJob(jobDetail, trigger);
 		} catch (SchedulerException e) {
 			log.error(e.toString());
-			throw new JeecgBootException("创建定时任务失败");
+			throw new ServiceException("创建定时任务失败");
 		} catch (Exception e) {
-			throw new JeecgBootException("后台找不到该类名任务");
+			throw new ServiceException("后台找不到该类名任务");
 		}
 	}
 
@@ -287,7 +284,7 @@ public class QuartzJobController {
 			scheduler.unscheduleJob(TriggerKey.triggerKey(jobClassName));
 			scheduler.deleteJob(JobKey.jobKey(jobClassName));
 		} catch (Exception e) {
-			throw new JeecgBootException("删除定时任务失败");
+			throw new ServiceException("删除定时任务失败");
 		}
 	}
 
