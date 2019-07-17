@@ -3,7 +3,7 @@ import { getAction,deleteAction,putAction,postAction} from '@/api/manage'
 //根路径
 const doMian = "/jx-boot/";
 //图片预览请求地址
-const imgView = "http://127.0.0.1:8080/jx-boot/sys/common/view/";
+const imgView = "http://127.0.0.1:8098/jx-boot/sys/common/view/";
 
 
 //角色管理
@@ -13,7 +13,7 @@ const getRoleList = (params)=>getAction("/sys/role/list",params);
 const deleteRole = (params)=>deleteAction("/sys/role/delete",params);
 const deleteRoleList = (params)=>deleteAction("/sys/role/deleteBatch",params);
 const checkRoleCode = (params)=>getAction("/sys/role/checkRoleCode",params);
-const queryall = (params)=>getAction("/sys/role/queryall",params);
+const queryall = (params)=>getAction("/sys/role/queryAll",params);
 
 //用户管理
 const addUser = (params)=>postAction("/sys/user/add",params);
@@ -42,10 +42,10 @@ const queryPermissionsByUser = (params)=>getAction("/sys/permission/queryByUser"
 const loadAllRoleIds = (params)=>getAction("/sys/permission/loadAllRoleIds",params);
 
 // 部门管理
-const queryDepartTreeList = (params)=>getAction("/sysdepart/sysDepart/queryTreeList",params);
-const queryIdTree = (params)=>getAction("/sysdepart/sysDepart/queryIdTree",params);
-const queryParentName   = (params)=>getAction("/sysdepart/sysDepart/queryParentName",params);
-const searchByKeywords   = (params)=>getAction("/sysdepart/sysDepart/searchBy",params);
+const queryDepartTreeList = (params)=>getAction("/sys/dept/queryTreeList",params);
+const queryIdTree = (params)=>getAction("/sys/dept/queryIdTree",params);
+const queryParentName   = (params)=>getAction("/sys/dept/queryParentName",params);
+const searchByKeywords   = (params)=>getAction("/sys/dept/searchBy",params);
 
 //日志管理
 const getLogList = (params)=>getAction("/sys/log/list",params);

@@ -177,7 +177,7 @@
       },
       loadPermissions () {
         getPermissions().then(res => {
-          let result = res.result
+          let result = res.data
           this.permissions = result.map(permission => {
             const options = actionToObject(permission.actionData)
             permission.checkedAll = false

@@ -259,7 +259,7 @@
         loadData: parameter => {
           return getServiceList(Object.assign(parameter, this.queryParam))
             .then(res => {
-              return res.result
+              return res.data
             })
         },
 

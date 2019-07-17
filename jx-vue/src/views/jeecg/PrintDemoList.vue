@@ -130,21 +130,20 @@
       loadData(reBizCode){
         // 获取材料文件
         getAction(this.url.loadRegisterFiles,{reBizCode:reBizCode}).then((res)=>{
-          if(res.success){
-            console.log(res.result)
-            this.dataSource = res.result;
+          if(res.code == 200){
+            this.dataSource = res.data;
           }
         });
         // 获取申请人信息
         getAction(this.url.loadApplicant,{reBizCode:reBizCode}).then((res)=>{
-          if(res.success){
-            this.applicant = res.result;
+          if(res.code == 200){
+            this.applicant = res.data;
             var name ="";
-            for(var i=0;i<res.result.length;i++){
-              if(i==res.result.length-1){
-                name = name+res.result[i].name;
+            for(var i=0;i<res.data.length;i++){
+              if(i==res.data.length-1){
+                name = name+res.data[i].name;
               }else{
-                name = name+res.result[i].name+",";
+                name = name+res.data[i].name+",";
               }
             }
             if(name=="" || name==null ||name=="null"){

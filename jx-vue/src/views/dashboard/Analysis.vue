@@ -212,8 +212,8 @@
     methods: {
       initLogInfo () {
         getLoginfo(null).then((res)=>{
-          if(res.success){
-            this.loginfo = res.result;
+          if(res.code == 200){
+            this.loginfo = res.data;
           }
         })
       },

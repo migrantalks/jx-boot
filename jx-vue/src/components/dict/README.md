@@ -24,8 +24,8 @@ DictSelectUtil.js 列表字典函数用法说明
       initDictConfig() {
         //初始化字典 - 性别
         initDictOptions('sex').then((res) => {
-          if (res.success) {
-            this.sexDictOptions = res.result;
+          if (res.code == 200) {
+            this.sexDictOptions = res.data;
           }
         });
       },

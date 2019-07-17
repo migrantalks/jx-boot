@@ -206,7 +206,7 @@
         loadData: parameter => {
           return getRoleList(parameter)
             .then(res => {
-              return res.result
+              return res.data
             })
         },
 

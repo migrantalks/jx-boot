@@ -120,9 +120,8 @@
           roleId:that.roleId
         };
         that.loading = true;
-        console.log("请求参数：",params);
         saveRolePermission(params).then((res)=>{
-          if(res.success){
+          if(res.code == 200){
             that.$message.success(res.message);
             that.loading = false;
             that.close();
@@ -138,13 +137,12 @@
     visible () {
       if (this.visible) {
         queryTreeList().then((res) => {
-          this.treeData = res.result.treeList
-          this.allTreeKeys = res.result.ids
+          this.treeData = res.data.treeList
+          this.allTreeKeys = res.data.ids
           queryRolePermission({roleId:this.roleId}).then((res)=>{
-              this.checkedKeys = [...res.result];
-              this.defaultCheckedKeys = [...res.result];
+              this.checkedKeys = [...res.data];
+              this.defaultCheckedKeys = [...res.data];
               this.expandedKeysss = this.allTreeKeys;
-              //console.log(this.defaultCheckedKeys)
           })
         })
       }

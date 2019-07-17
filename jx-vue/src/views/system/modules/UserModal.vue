@@ -8,14 +8,11 @@
     @cancel="handleCancel"
     cancelText="关闭"
     wrapClassName="ant-modal-cust-warp"
-    style="top:5%;height: 95%;overflow-y: hidden">
+    style="top:5%;height: 95%;">
 
     <template slot="title">
       <div style="width: 100%;">
         <span>{{ title }}</span>
-        <span style="display:inline-block;width:calc(100% - 56px);padding-top: 2px;padding-right:10px;text-align: right">
-          <a-button @click="togglescreen" style="height:18px;width:18px;padding: 0;border-width: 2px">&nbsp;&nbsp;</a-button>
-        </span>
       </div>
 
     </template>
@@ -38,7 +35,7 @@
         </template>
 
         <a-form-item label="用户名称" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >
-          <a-input placeholder="请输入用户名称" v-decorator="[ 'realname', validatorRules.realname]" />
+          <a-input placeholder="请输入用户名称" v-decorator="[ 'username', validatorRules.realname]" />
         </a-form-item>
 
         <a-form-item label="角色分配" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >
@@ -50,15 +47,8 @@
             <a-select-option v-for="(role,roleindex) in roleList" :key="roleindex.toString()" :value="role.id">
               {{ role.roleName }}
             </a-select-option>
-
-
           </a-select>
-
         </a-form-item>
-
-
-
-
         <a-form-item label="头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-upload
             listType="picture-card"
@@ -196,8 +186,8 @@
       },
       initialRoleList(){
         queryall().then((res)=>{
-          if(res.success){
-            this.roleList = res.result;
+          if(res.code == 200){
+            this.roleList = res.data;
           }else{
             console.log(res.message);
           }
@@ -205,8 +195,8 @@
       },
       loadUserRoles(userid){
         queryUserRole({userid:userid}).then((res)=>{
-          if(res.success){
-            this.selectedRole = res.result;
+          if(res.code == 200){
+            this.selectedRole = res.data;
           }else{
             console.log(res.message);
           }
@@ -259,7 +249,7 @@
               obj=editUser(formData);
             }
             obj.then((res)=>{
-              if(res.success){
+              if(res.code == 200){
                 that.$message.success(res.message);
                 that.$emit('ok');
               }else{
@@ -304,7 +294,7 @@
           username:value
         };
         checkUsername(params).then((res)=>{
-          if(res.success){
+          if(res.code == 200){
             callback();
           }else{
             callback("用户账号已存在！");

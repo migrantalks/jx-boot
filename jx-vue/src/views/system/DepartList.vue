@@ -177,9 +177,9 @@
           mobile:{rules: [{validator:this.validateMobile}]}
         },
         url: {
-          delete: "/sysdepart/sysDepart/delete",
-          edit: "/sysdepart/sysDepart/edit",
-          deleteBatch: "/sysdepart/sysDepart/deleteBatch",
+          delete: "/sys/dept/delete",
+          edit: "/sys/dept/edit",
+          deleteBatch: "/sys/dept/deleteBatch",
         },
       }
     },
@@ -189,13 +189,12 @@
         that.treeData = [];
         that.departTree = [];
         queryDepartTreeList().then((res)=>{
-          if(res.success){
-            for (let i = 0; i < res.result.length; i++) {
-              let temp = res.result[i];
+          if(res.code == 200){
+            for (let i = 0; i < res.data.length; i++) {
+              let temp = res.data[i];
               that.treeData.push(temp);
               that.departTree.push(temp);
               that.setThisExpandedKeys(temp);
-              console.log(temp.id)
             }
             this.loading = false;
           }
@@ -214,7 +213,6 @@
         this.loadTree();
       },
       onExpand (expandedKeys) {
-        console.log('onExpand', expandedKeys)
         // if not set autoExpandParent to false, if children expanded, parent can not collapse.
         // or, you can remove all expanded children keys.
         this.iExpandedKeys = expandedKeys
@@ -227,7 +225,6 @@
         this.$refs.nodeModal.add(this.currFlowId,'');
       },
       batchDel: function(){
-        console.log(this.checkedKeys)
         if(this.checkedKeys.length<=0){
           this.$message.warning('请选择一条记录！');
         }else{
@@ -257,10 +254,10 @@
         let that = this;
         if(value){
           searchByKeywords({keyWord:value}).then((res) =>{
-            if(res.success){
+            if(res.code == 200){
               that.departTree = [];
-              for (let i = 0; i < res.result.length; i++) {
-                let temp = res.result[i];
+              for (let i = 0; i < res.data.length; i++) {
+                let temp = res.data[i];
                 that.departTree.push(temp);
               }
             }else{
@@ -278,15 +275,12 @@
       nodeModalClose(){
       },
       onCheck (checkedKeys,info) {
-        console.log('onCheck', checkedKeys, info)
         this.hiding = false;
         this.checkedKeys = checkedKeys.checked;
       },
       onSelect (selectedKeys,e) {
-        console.log('selected', selectedKeys, e)
         this.hiding = false;
         let record = e.node.dataRef;
-        console.log("onSelect-record",record);
         this.currSelected = Object.assign({},record);
         this.model = this.currSelected;
         this.selectedKeys = [record.key];
@@ -324,7 +318,6 @@
             }
 
             let formData = Object.assign(this.currSelected, values);
-            console.log('Received values of form: ', formData)
             httpAction(this.url.edit, formData, "put").then((res) => {
               if (res.success) {
                 this.$message.success("保存成功!");
@@ -375,7 +368,6 @@
         }
       },
       selectDirectiveOk(record){
-        console.log("选中指令数据",record);
         this.nodeSettingForm.setFieldsValue({directiveCode:record.directiveCode});
         this.currSelected.sysCode = record.sysCode;
       },

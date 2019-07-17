@@ -146,7 +146,6 @@
         columns:columns,
         rowSelection:{
           onChange: (selectedRowKeys) => {
-            //console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             this.selectedRowKeys = selectedRowKeys;
           },
 
@@ -163,12 +162,11 @@
       loadData (){
         this.dataSource = [];
         getPermissionList().then((res)=>{
-          if(res.success){
-            console.log( res.result);
-            this.dataSource = res.result;
+          if(res.code == 200){
+            this.dataSource = res.data;
 
-            /*for(let a = 0;a<res.result.length;a++){
-              let temp = res.result[a];
+            /*for(let a = 0;a<res.data.length;a++){
+              let temp = res.data[a];
 
               this.dataSource.push(temp);
             }*/

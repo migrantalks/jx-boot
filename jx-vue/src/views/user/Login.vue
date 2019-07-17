@@ -10,7 +10,7 @@
           <a-form-item
             fieldDecoratorId="username"
             :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入帐户名或邮箱' }, { validator: this.handleUsernameOrEmail }], validateTrigger: 'change'}">
-            <a-input size="large" type="text" placeholder="请输入帐户名 / jeecg">
+            <a-input size="large" type="text" placeholder="请输入帐户名">
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
@@ -18,7 +18,7 @@
           <a-form-item
             fieldDecoratorId="password"
             :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}">
-            <a-input size="large" type="password" autocomplete="false" placeholder="密码 / 123456">
+            <a-input size="large" type="password" autocomplete="false" placeholder="密码">
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
@@ -72,16 +72,6 @@
           :disabled="loginBtn">确定
         </a-button>
       </a-form-item>
-
-      <div class="user-login-other">
-        <span>其他登陆方式</span>
-        <a><a-icon class="item-icon" type="alipay-circle"></a-icon></a>
-        <a><a-icon class="item-icon" type="taobao-circle"></a-icon></a>
-        <a><a-icon class="item-icon" type="weibo-circle"></a-icon></a>
-        <router-link class="register" :to="{ name: 'register' }">
-          注册账户
-        </router-link>
-      </div>
     </a-form>
 
     <two-step-captcha
@@ -132,7 +122,7 @@
       // update-begin- --- author:scott ------ date:20190225 ---- for:暂时注释，未实现登录验证码功能
 //      this.$http.get('/auth/2step-code')
 //        .then(res => {
-//          this.requiredTwoStepCaptcha = res.result.stepCode
+//          this.requiredTwoStepCaptcha = res.data.stepCode
 //        }).catch(err => {
 //          console.log('2step-code:', err)
 //        })
@@ -222,7 +212,7 @@
                   setTimeout(hide, 2500);
                   this.$notification[ 'success' ]({
                     message: '提示',
-                    description: '验证码获取成功，您的验证码为：' + res.result.captcha,
+                    description: '验证码获取成功，您的验证码为：' + res.data.captcha,
                     duration: 8
                   })
                 })

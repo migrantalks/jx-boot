@@ -57,7 +57,6 @@
               </a>
             </span>
           </a-col>
-
         </a-row>
       </a-form>
     </div>
@@ -72,7 +71,6 @@
         ghost
         type="primary"
         icon="delete">批量删除</a-button>-->
-
 
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay" @click="handleMenuClick">
@@ -155,20 +153,14 @@
                   <a>解冻</a>
                 </a-popconfirm>
               </a-menu-item>
-
             </a-menu>
           </a-dropdown>
         </span>
-
-
       </a-table>
     </div>
     <!-- table区域-end -->
-
     <user-modal ref="modal" @ok="modalFormOk"></user-modal>
-
     <password-modal ref="passwordmodal" @ok="passwordModalOk"></password-modal>
-
   </a-card>
 </template>
 
@@ -180,7 +172,7 @@
   import {doMian,getUserList,deleteUser,deleteUserList,frozenBatch} from '@/api/api'
 
   export default {
-    name: "UserList",
+    name: 'UserList',
     components: {
       UserModal,
       PasswordModal
@@ -190,38 +182,28 @@
         description: '这是用户管理页面',
         queryParam: {},
         columns: [
-          /*{
-            title: '#',
-            dataIndex: '',
-            key:'rowIndex',
-            width:60,
-            align:"center",
-            customRender:function (t,r,index) {
-              return parseInt(index)+1;
-            }
-          },*/
           {
             title: '用户账号',
-            align:"center",
-            dataIndex: 'username',
-            fixed:'left',
-            width:200
+            align: 'center',
+            dataIndex: 'loginName',
+            fixed: 'left',
+            width: 200
           },
           {
             title: '真实姓名',
-            align:"center",
-            dataIndex: 'realname',
+            align: 'center',
+            dataIndex: 'username',
           },
           {
             title: '头像',
-            align:"center",
+            align: 'center',
             dataIndex: 'avatar',
             scopedSlots:{customRender:"avatarslot"}
           },
 
           {
             title: '性别',
-            align:"center",
+            align: 'center',
             dataIndex: 'sex',
             customRender:function (text) {
               if(text==1){
@@ -235,22 +217,22 @@
           },
           {
             title: '生日',
-            align:"center",
+            align: 'center',
             dataIndex: 'birthday'
           },
           {
             title: '手机号码',
-            align:"center",
+            align: 'center',
             dataIndex: 'phone'
           },
           {
             title: '邮箱',
-            align:"center",
+            align: 'center',
             dataIndex: 'email'
           },
           {
             title: '状态',
-            align:"center",
+            align: 'center',
             dataIndex: 'status',
             customRender:function (text) {
               if(text==1){
@@ -264,22 +246,21 @@
           },
           {
             title: '创建时间',
-            align:"center",
+            align: 'center',
             dataIndex: 'createTime',
-            sorter:true
+            sorter: true
           },
           {
             title: '操作',
             dataIndex: 'action',
             scopedSlots: { customRender: 'action' },
             fixed:"right",
-            align:"center",
-            width:150
+            align: 'center',
+            width: 150
           }
-
         ],
-        dataSource:[],
-        ipagination:{
+        dataSource: [],
+        ipagination: {
           current: 1,
           pageSize: 10,
           pageSizeOptions: ['10', '20', '30'],
@@ -294,30 +275,28 @@
           column: 'createTime',
           order: 'desc',
         },
-        loading:false,
+        loading: false,
         selectedRowKeys: [],
         selectedRows: [],
         toggleSearchStatus:false,
         url: {
-          imgerver:doMian+"/sys/common/view"
-        },
-
+          imgerver: doMian+"/sys/common/view"
+        }
       }
     },
     created() {
       this.loadData();
     },
-
     methods: {
       loadData (arg){
-        if(arg===1){
+        if (arg === 1) {
           this.ipagination.current = 1;
         }
         let params = this.getQueryParams();//查询条件
         getUserList(params).then((res)=>{
-          if(res.success){
-            this.dataSource = res.result.records;
-            this.ipagination.total = res.result.total;
+          if (res.code == 200) {
+            this.dataSource = res.data.records;
+            this.ipagination.total = res.data.total;
           }
         })
       },
@@ -330,12 +309,12 @@
       },
       getQueryField(){
         let str = "id,";
-        for(let a = 0;a<this.columns.length;a++){
-          str+=","+this.columns[a].dataIndex;
+        for(let a = 0; a < this.columns.length; a++){
+          str += "," + this.columns[a].dataIndex;
         }
         return str;
       },
-      getAvatarView:function(avatar){
+      getAvatarView: function(avatar){
         return this.url.imgerver +"/"+ avatar;
       },
       onSelectChange (selectedRowKeys,selectionRows) {
@@ -356,26 +335,26 @@
         });
         that.loadData(1);
       },
-      batchFrozen:function(status){
-        if(this.selectedRowKeys.length<=0){
+      batchFrozen: function(status){
+        if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;
-        }else{
+        } else {
           let ids = "";
           let that = this;
           that.selectedRowKeys.forEach(function(val) {
-            ids+=val+",";
+            ids += val + ",";
           });
           that.$confirm({
-            title:"确认操作",
-            content:"是否"+(status==1?"解冻":"冻结")+"选中账号?",
+            title: "确认操作",
+            content: "是否"+(status==1?"解冻":"冻结")+"选中账号?",
             onOk: function(){
               frozenBatch({ids: ids,status:status}).then((res)=>{
-                if(res.success){
+                if (res.code == 200) {
                   that.$message.success(res.message);
                   that.loadData();
                   that.onClearSelected();
-                }else{
+                } else {
                   that.$message.warning(res.message);
                 }
               });
@@ -384,25 +363,25 @@
         }
       },
       batchdel: function(){
-        if(this.selectedRowKeys.length<=0){
+        if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;
-        }else{
+        } else {
           let ids = "";
           let that = this;
           that.selectedRowKeys.forEach(function(val) {
-            ids+=val+",";
+            ids += val + ",";
           });
           that.$confirm({
-            title:"确认删除",
-            content:"是否删除选中数据?",
+            title: "确认删除",
+            content: "是否删除选中数据?",
             onOk: function(){
               deleteUserList({ids: ids}).then((res)=>{
-                if(res.success){
+                if (res.code == 200){
                   that.$message.success(res.message);
                   that.loadData();
                   that.onClearSelected();
-                }else{
+                } else {
                   that.$message.warning(res.message);
                 }
               });
@@ -422,21 +401,21 @@
       handleDelete: function(id){
         let that = this;
         deleteUser({id: id}).then((res)=>{
-          if(res.success){
+          if (res.code == 200) {
             that.$message.success(res.message);
             that.loadData();
-          }else{
+          } else {
             that.$message.warning(res.message);
           }
         });
       },
       handleFrozen: function(id,status){
         let that = this;
-        frozenBatch({ids: id,status:status}).then((res)=>{
-          if(res.success){
+        frozenBatch({ids: id, status: status}).then((res)=>{
+          if (res.code == 200){
             that.$message.success(res.message);
             that.loadData();
-          }else{
+          } else {
             that.$message.warning(res.message);
           }
         });
@@ -449,14 +428,13 @@
         this.$refs.modal.add();
         this.$refs.modal.title="新增";
       },
-      handleDetail:function(record){
+      handleDetail: function(record){
         this.$refs.modal.edit(record);
         this.$refs.modal.title="详情";
         this.$refs.modal.disableSubmit = true;
       },
       handleTableChange(pagination, filters, sorter){
-        //TODO 筛选
-        if (Object.keys(sorter).length>0){
+        if (Object.keys(sorter).length > 0){
           this.isorter.column = sorter.field;
           this.isorter.order = "ascend"==sorter.order?"asc":"desc"
         }
@@ -473,10 +451,8 @@
         this.loadData();
       },
       passwordModalOk(){
-        //TODO 密码修改完成 不需要刷新页面，可以把datasource中的数据更新一下
       }
     }
-
   }
 </script>
 <style scoped>

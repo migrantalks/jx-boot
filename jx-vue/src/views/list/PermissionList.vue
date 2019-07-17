@@ -195,7 +195,7 @@
           return this.$http.get('/api/permission', {
             params: Object.assign(parameter, this.queryParam)
           }).then(res => {
-            let result = res.result
+            let result = res.data
             result.data.map(permission => {
                 permission.actionList = JSON.parse(permission.actionData)
                 return permission

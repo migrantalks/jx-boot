@@ -208,20 +208,20 @@
       getProjects() {
         this.$http.get('/api/list/search/projects')
           .then(res => {
-            this.projects = res.result && res.result.data
+            this.projects = res.data && res.data.data
             this.loading = false
           })
       },
       getActivity() {
         this.$http.get('/api/workplace/activity')
           .then(res => {
-            this.activities = res.result
+            this.activities = res.data
           })
       },
       getTeams() {
         this.$http.get('/api/workplace/teams')
           .then(res => {
-            this.teams = res.result
+            this.teams = res.data
           })
       },
       initRadar() {
@@ -230,7 +230,7 @@
         this.$http.get('/api/workplace/radar')
           .then(res => {
 
-            const dv = new DataSet.View().source(res.result)
+            const dv = new DataSet.View().source(res.data)
             dv.transform({
               type: 'fold',
               fields: ['个人', '团队', '部门'],

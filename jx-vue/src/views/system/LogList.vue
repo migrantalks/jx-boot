@@ -179,9 +179,9 @@
         var params = this.getQueryParams();//查询条件
         this.loading=true;
         getLogList(params).then((res)=>{
-          if(res.success){
-            this.dataSource = res.result.records;
-            this.ipagination.total = res.result.total;
+          if(res.code == 200){
+            this.dataSource = res.data.records;
+            this.ipagination.total = res.data.total;
             this.loading=false;
             this.loadrefresh = false;
           }

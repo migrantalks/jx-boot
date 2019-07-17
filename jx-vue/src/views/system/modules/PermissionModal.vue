@@ -164,11 +164,9 @@
       loadTree(){
         var that = this;
         queryTreeList().then((res)=>{
-          if(res.success){
-            console.log('----queryTreeList---')
-            console.log(res)
+          if(res.code == 200){
             that.treeData = [];
-            let treeList = res.result.treeList
+            let treeList = res.data.treeList
             for(let a=0;a<treeList.length;a++){
               let temp = treeList[a];
               temp.isLeaf = temp.leaf;

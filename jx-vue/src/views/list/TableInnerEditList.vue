@@ -176,7 +176,7 @@
           return this.$http.get('/api/service', {
             params: Object.assign(parameter, this.queryParam)
           }).then(res => {
-            return res.result
+            return res.data
           })
         },
 

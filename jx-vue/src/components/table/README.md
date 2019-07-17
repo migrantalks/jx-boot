@@ -71,7 +71,7 @@ Table 重封装组件说明
           return this.$http.get('/service', {
             params: Object.assign(parameter, this.queryParam)
           }).then(res => {
-            return res.result
+            return res.data
           })
         },
       }
@@ -162,7 +162,7 @@ Table 重封装组件说明
           return this.$http.get('/service', {
             params: Object.assign(parameter, this.queryParam)
           }).then(res => {
-            return res.result
+            return res.data
           })
         },
       }

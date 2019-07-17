@@ -52,8 +52,8 @@ export async function ajaxFilterDictText(dictCode, key) {
   }
   //通过请求读取字典文本
   let res = await getAction(`/sys/dict/getDictText/${dictCode}/${key}`);
-  if (res.success) {
-    return res.result;
+  if (res.code == 200) {
+    return res.data;
   } else {
     return '';
   }

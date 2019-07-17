@@ -115,10 +115,10 @@
       loadTreeData(){
         var that = this;
         queryIdTree().then((res)=>{
-          if(res.success){
+          if(res.code == 200){
             that.departTree = [];
-            for (let i = 0; i < res.result.length; i++) {
-              let temp = res.result[i];
+            for (let i = 0; i < res.data.length; i++) {
+              let temp = res.data[i];
               that.departTree.push(temp);
               console.log(temp.id)
             }

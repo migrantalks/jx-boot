@@ -100,9 +100,9 @@
             that.confirmLoading = true;
             if(this.userId == null){
               getAction(this.url.userId).then((res)=>{
-                if(res.success){
+                if(res.code == 200){
                   that.$message.success(res.message);
-                  let formData = {userId:res.result,
+                  let formData = {userId:res.data,
                     departIdList:this.departList}
                   console.log(formData)
                   that.$emit('ok', formData);
@@ -147,8 +147,8 @@
       },
       queryDepartTree(){
         queryIdTree().then((res)=>{
-          if(res.success){
-            this.departTree = res.result;
+          if(res.code == 200){
+            this.departTree = res.data;
           }
         })
       },

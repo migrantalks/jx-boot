@@ -70,7 +70,6 @@
       }
     },
     created () {
-      console.log("created");
     },
 
     methods: {

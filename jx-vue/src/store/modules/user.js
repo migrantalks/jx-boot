@@ -40,15 +40,15 @@ const user = {
     Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
-          if(response.code =='200'){
-            const result = response.result
+          if(response.code === 200){
+            const result = response.data
             const userInfo = result.userInfo
             Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_NAME, userInfo.username, 7 * 24 * 60 * 60 * 1000)
+            Vue.ls.set(USER_NAME, userInfo.loginName, 7 * 24 * 60 * 60 * 1000)
             Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
             commit('SET_TOKEN', result.token)
             commit('SET_INFO', userInfo)
-            commit('SET_NAME', { username: userInfo.username,realname: userInfo.realname, welcome: welcome() })
+            commit('SET_NAME', { username: userInfo.loginName,realname: userInfo.username, welcome: welcome() })
             commit('SET_AVATAR', userInfo.avatar)
             resolve()
           }else{
@@ -66,7 +66,7 @@ const user = {
         let username = Vue.ls.get(USER_NAME);
         let params = {username:username};
         queryPermissionsByUser(params).then(response => {
-          const menuData = response.result;
+          const menuData = response.data;
           if (menuData && menuData.length > 0) {
             commit('SET_PERMISSIONLIST', menuData)
           } else {
