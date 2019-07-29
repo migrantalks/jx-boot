@@ -294,7 +294,7 @@
         }
         let params = this.getQueryParams();//查询条件
         getUserList(params).then((res)=>{
-          if (res.code == 200) {
+          if (res.success) {
             this.dataSource = res.data.records;
             this.ipagination.total = res.data.total;
           }
@@ -350,7 +350,7 @@
             content: "是否"+(status==1?"解冻":"冻结")+"选中账号?",
             onOk: function(){
               frozenBatch({ids: ids,status:status}).then((res)=>{
-                if (res.code == 200) {
+                if (res.success) {
                   that.$message.success(res.message);
                   that.loadData();
                   that.onClearSelected();
@@ -377,7 +377,7 @@
             content: "是否删除选中数据?",
             onOk: function(){
               deleteUserList({ids: ids}).then((res)=>{
-                if (res.code == 200){
+                if (res.success){
                   that.$message.success(res.message);
                   that.loadData();
                   that.onClearSelected();
@@ -401,7 +401,7 @@
       handleDelete: function(id){
         let that = this;
         deleteUser({id: id}).then((res)=>{
-          if (res.code == 200) {
+          if (res.success) {
             that.$message.success(res.message);
             that.loadData();
           } else {
@@ -412,7 +412,7 @@
       handleFrozen: function(id,status){
         let that = this;
         frozenBatch({ids: id, status: status}).then((res)=>{
-          if (res.code == 200){
+          if (res.success){
             that.$message.success(res.message);
             that.loadData();
           } else {

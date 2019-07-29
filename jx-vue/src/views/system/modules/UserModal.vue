@@ -186,7 +186,7 @@
       },
       initialRoleList(){
         queryall().then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.roleList = res.data;
           }else{
             console.log(res.message);
@@ -195,7 +195,7 @@
       },
       loadUserRoles(userid){
         queryUserRole({userid:userid}).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.selectedRole = res.data;
           }else{
             console.log(res.message);
@@ -249,7 +249,7 @@
               obj=editUser(formData);
             }
             obj.then((res)=>{
-              if(res.code == 200){
+              if(res.success){
                 that.$message.success(res.message);
                 that.$emit('ok');
               }else{
@@ -294,7 +294,7 @@
           username:value
         };
         checkUsername(params).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             callback();
           }else{
             callback("用户账号已存在！");

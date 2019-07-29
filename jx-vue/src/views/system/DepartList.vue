@@ -189,7 +189,7 @@
         that.treeData = [];
         that.departTree = [];
         queryDepartTreeList().then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             for (let i = 0; i < res.data.length; i++) {
               let temp = res.data[i];
               that.treeData.push(temp);
@@ -254,7 +254,7 @@
         let that = this;
         if(value){
           searchByKeywords({keyWord:value}).then((res) =>{
-            if(res.code == 200){
+            if(res.success){
               that.departTree = [];
               for (let i = 0; i < res.data.length; i++) {
                 let temp = res.data[i];

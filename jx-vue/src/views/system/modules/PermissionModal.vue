@@ -164,7 +164,7 @@
       loadTree(){
         var that = this;
         queryTreeList().then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             that.treeData = [];
             let treeList = res.data.treeList
             for(let a=0;a<treeList.length;a++){

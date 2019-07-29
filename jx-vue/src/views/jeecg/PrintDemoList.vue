@@ -130,13 +130,13 @@
       loadData(reBizCode){
         // 获取材料文件
         getAction(this.url.loadRegisterFiles,{reBizCode:reBizCode}).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.dataSource = res.data;
           }
         });
         // 获取申请人信息
         getAction(this.url.loadApplicant,{reBizCode:reBizCode}).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.applicant = res.data;
             var name ="";
             for(var i=0;i<res.data.length;i++){

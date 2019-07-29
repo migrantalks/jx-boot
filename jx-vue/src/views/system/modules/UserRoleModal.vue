@@ -121,7 +121,7 @@
         };
         that.loading = true;
         saveRolePermission(params).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             that.$message.success(res.message);
             that.loading = false;
             that.close();

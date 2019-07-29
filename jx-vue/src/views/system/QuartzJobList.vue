@@ -203,7 +203,7 @@
         }
         var params = this.getQueryParams();//查询条件
         getAction(this.url.list,params).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.dataSource = res.data.records;
             this.ipagination.total = res.data.total;
           }

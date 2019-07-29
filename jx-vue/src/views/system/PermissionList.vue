@@ -162,7 +162,7 @@
       loadData (){
         this.dataSource = [];
         getPermissionList().then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.dataSource = res.data;
 
             /*for(let a = 0;a<res.data.length;a++){

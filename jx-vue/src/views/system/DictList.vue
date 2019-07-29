@@ -242,7 +242,7 @@
         this.loading=true;
         // 查询字典
         treeList({dictName:this.queryParam.dictName,delFlag:this.queryParam.delFlag}).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.treeData=[];
             for(let a=0;a<res.data.length;a++){
               let temp = res.data[a];
@@ -253,7 +253,7 @@
         // 查询字典数据
         var params = this.getQueryParams();//查询条件
         getDictItemList(params).then((res)=>{
-          if(res.code == 200){
+          if(res.success){
             this.dataSource = res.data.records;
             this.ipagination.total = res.data.total;
             this.loadrefresh=false;
